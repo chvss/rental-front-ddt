@@ -51,43 +51,43 @@
 </template>
 
 <script>
-import FormSubmitButton from "@/components/elements/FormSubmitButton";
+import FormSubmitButton from '@/components/elements/FormSubmitButton';
 
 export default {
-  name: "UserPersonalForm",
+    name: 'UserPersonalForm',
 
-  data: () => ({
-    firstname: null,
-    secondname: null,
-    email: null,
-    phone: null,
-    city: null,
+    data: () => ({
+        firstname: null,
+        secondname: null,
+        email: null,
+        phone: null,
+        city: null,
 
-    username: '',
-    rules: {
-      required: v => !!v || 'Не может быть пустым',
+        username: '',
+        rules: {
+            required: v => !!v || 'Не может быть пустым',
+        },
+    }),
+
+    methods: {
+        submit: function () {
+            let data = {
+                firstname: this.firstname,
+                secondname: this.secondname,
+                email: this.email,
+                phone: this.phone,
+                city: this.city,
+            }
+
+            // TODO: заглушка на изменение личных данных
+            this.$store.dispatch('changePersonalInfo', data)
+                .then(() => this.$router.push('/'))
+                .catch(err => console.log(err))
+        }
     },
-  }),
 
-  methods: {
-    submit: function () {
-      let data = {
-        firstname: this.firstname,
-        secondname: this.secondname,
-        email: this.email,
-        phone: this.phone,
-        city: this.city,
-      }
-
-      // TODO: заглушка на изменение личных данных
-      this.$store.dispatch('changePersonalInfo', data)
-        .then(() => this.$router.push('/'))
-        .catch(err => console.log(err))
+    components: {
+        FormSubmitButton,
     }
-  },
-
-  components: {
-    FormSubmitButton,
-  }
 }
 </script>

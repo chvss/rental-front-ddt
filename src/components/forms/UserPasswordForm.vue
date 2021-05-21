@@ -44,42 +44,42 @@
 </template>
 
 <script>
-import FormSubmitButton from "@/components/elements/FormSubmitButton";
+import FormSubmitButton from '@/components/elements/FormSubmitButton';
 
 export default {
-  name: "UserPasswordForm",
+    name: 'UserPasswordForm',
 
-  data: () => ({
-    showPassword: false,
-    showNewPassword: false,
-    showRepeatNewPassword: false,
+    data: () => ({
+        showPassword: false,
+        showNewPassword: false,
+        showRepeatNewPassword: false,
 
-    password: null,
-    newPassword: null,
-    repeatNewPassword: null,
+        password: null,
+        newPassword: null,
+        repeatNewPassword: null,
 
-    rules: {
-      required: v => !!v || 'Не может быть пустым',
+        rules: {
+            required: v => !!v || 'Не может быть пустым',
+        },
+    }),
+
+    methods: {
+        submit: function () {
+            let data = {
+                password: this.password,
+                newPassword: this.newPassword,
+                repeatNewPassword: this.repeatNewPassword,
+            }
+
+            // TODO: заглушка на смену пароля
+            this.$store.dispatch('changePassword', data)
+                .then(() => this.$router.push('/'))
+                .catch(err => console.log(err))
+        }
     },
-  }),
 
-  methods: {
-    submit: function () {
-      let data = {
-        password: this.password,
-        newPassword: this.newPassword,
-        repeatNewPassword: this.repeatNewPassword,
-      }
-
-      // TODO: заглушка на смену пароля
-      this.$store.dispatch('changePassword', data)
-        .then(() => this.$router.push('/'))
-        .catch(err => console.log(err))
+    components: {
+        FormSubmitButton,
     }
-  },
-
-  components: {
-    FormSubmitButton,
-  }
 }
 </script>
