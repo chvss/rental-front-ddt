@@ -35,17 +35,17 @@ export default {
         submit: function () {
             let data = {
                 name: this.name,
-            }
+            };
 
             // TODO: заглушка на создание компании
             this.$store.dispatch('createBusinessAccount', data)
                 .then(() => this.$router.push('/'))
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         }
     },
 
     components: {
         FormSubmitButton,
     }
-}
+};
 </script>

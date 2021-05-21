@@ -11,7 +11,7 @@ import Header from '@/components/base/Header';
 import Main from '@/components/base/Main';
 import Footer from '@/components/base/Footer';
 
-import {mapActions, mapGetters} from 'vuex'
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
     name: 'App',

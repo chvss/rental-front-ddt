@@ -68,7 +68,7 @@ export default {
             rules: {
                 required: v => !!v || 'Не может быть пустым',
             },
-        }
+        };
     },
 
     methods: {

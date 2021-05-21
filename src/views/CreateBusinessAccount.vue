@@ -24,5 +24,5 @@ export default {
         PageHeader,
         BusinessAccountFormCreate,
     }
-}
+};
 </script>

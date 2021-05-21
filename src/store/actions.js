@@ -46,7 +46,7 @@ export default {
     },
     async fetchUser(ctx) {
         Vue.axios.get('/auth/user/').then(res => {
-            ctx.commit('set_user', res.data)
+            ctx.commit('set_user', res.data);
         }).catch(error => {
             // errorNotify('Ошибка получения пользователя');
             console.log(error);
