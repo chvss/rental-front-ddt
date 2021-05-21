@@ -23,12 +23,12 @@ import UserPersonalForm from '@/components/forms/UserPersonalForm';
 import UserPasswordForm from '@/components/forms/UserPasswordForm';
 
 export default {
-  name: 'Personal',
+    name: 'Personal',
 
-  components: {
-    PageHeader,
-    UserPersonalForm,
-    UserPasswordForm,
-  }
+    components: {
+        PageHeader,
+        UserPersonalForm,
+        UserPasswordForm,
+    }
 }
 </script>
