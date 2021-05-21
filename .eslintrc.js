@@ -11,6 +11,11 @@ module.exports = {
     parser: 'babel-eslint'
   },
   rules: {
+    eqeqeq: ['error', 'always'],
+    curly: ['error', 'all'],
+    quotes: ['error', 'single'],
+    indent: ['error', 4],
+    'no-var': 'error',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   }

@@ -44,33 +44,33 @@
 </template>
 
 <script>
-import FormSubmitButton from "@/components/elements/FormSubmitButton";
+import FormSubmitButton from '@/components/elements/FormSubmitButton';
 
 export default {
-  name: "Login",
+    name: 'Login',
 
-  data: () => ({
-    show: false,
-    valid: false,
-    username: '',
-    password: '',
-    rules: {
-      required: v => !!v || 'Не может быть пустым',
+    data: () => ({
+        show: false,
+        valid: false,
+        username: '',
+        password: '',
+        rules: {
+            required: v => !!v || 'Не может быть пустым',
+        },
+    }),
+
+    methods: {
+        login: function () {
+            let username = this.username;
+            let password = this.password;
+            this.$store.dispatch('login', {username, password})
+                .then(() => this.$router.push('/'))
+                .catch(err => console.log(err))
+        }
     },
-  }),
 
-  methods: {
-    login: function () {
-      let username = this.username;
-      let password = this.password;
-      this.$store.dispatch('login', {username, password})
-        .then(() => this.$router.push('/'))
-        .catch(err => console.log(err))
+    components: {
+        FormSubmitButton,
     }
-  },
-
-  components: {
-    FormSubmitButton,
-  }
 }
 </script>

@@ -70,68 +70,68 @@
 </template>
 
 <script>
-import HeaderButton from "@/components/elements/HeaderButton";
-import HeaderButtonIcon from "@/components/elements/HeaderButtonIcon";
+import HeaderButton from '@/components/elements/HeaderButton';
+import HeaderButtonIcon from '@/components/elements/HeaderButtonIcon';
 
 import {mapGetters} from 'vuex'
 
 export default {
-  name: "Header",
-  data: () => ({
-    menuUserItems: [
-      {
-        title: 'Главная',
-        href: '/'
-      },
-      {
-        title: 'История',
-        href: '/history'
-      },
-      {
-        title: 'Каталог',
-        href: '/catalog'
-      },
-      {
-        title: 'Личный кабинет',
-        href: '/personal'
-      },
-    ],
+    name: 'Header',
+    data: () => ({
+        menuUserItems: [
+            {
+                title: 'Главная',
+                href: '/'
+            },
+            {
+                title: 'История',
+                href: '/history'
+            },
+            {
+                title: 'Каталог',
+                href: '/catalog'
+            },
+            {
+                title: 'Личный кабинет',
+                href: '/personal'
+            },
+        ],
 
-    menuGuestRight: [
-      {
-        title: 'Войти',
-        href: '/login'
-      },
-      {
-        title: 'Регистрация',
-        href: '/signup'
-      },
-    ],
-  }),
+        menuGuestRight: [
+            {
+                title: 'Войти',
+                href: '/login'
+            },
+            {
+                title: 'Регистрация',
+                href: '/signup'
+            },
+        ],
+    }),
 
-  computed: {
-    ...mapGetters([
-      'isLoggedIn',
-    ])
-  },
-
-  methods: {
-    logout: function () {
-      this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push('/login')
-        })
+    computed: {
+        ...mapGetters([
+            'isLoggedIn',
+        ])
     },
-  },
 
-  components: {
-    HeaderButton,
-    HeaderButtonIcon,
-  },
+    methods: {
+        logout: function () {
+            this.$store.dispatch('logout')
+                .then(() => {
+                    this.$router.push('/login')
+                })
+        },
+    },
 
-  // TODO: для тесрирования, не забыть удалить!
-  created: function () {
-    console.log('isLoggedIn: ' + this.isLoggedIn);
-  }
+    components: {
+        HeaderButton,
+        HeaderButtonIcon,
+    },
+
+    // TODO: для тесрирования, не забыть удалить!
+    created: function () {
+        console.log('isLoggedIn: ' + this.isLoggedIn);
+    }
 }
 </script>

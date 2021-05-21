@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import PageHeader from "@/components/blocks/PageHeader";
+import PageHeader from '@/components/blocks/PageHeader';
 
 export default {
-  name: "Personal",
+    name: 'Personal',
 
-  components: {
-    PageHeader,
-  }
+    components: {
+        PageHeader,
+    }
 }
 </script>

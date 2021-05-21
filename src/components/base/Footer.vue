@@ -41,57 +41,57 @@
 
 <script>
 export default {
-  name: "Footer",
+    name: 'Footer',
 
-  data() {
-    return {
-      items: [
-        {
-          title: 'Расскажем',
-          links: [
-            {
-              title: 'Отзывы',
-              href: '#',
-            }
-          ]
-        },
-        {
-          title: 'Поддержим',
-          links: [
-            {
-              title: 'Телеграм канал',
-              href: '#',
-            },
-            {
-              title: 'Помощь',
-              href: '#',
-            },
-            {
-              title: 'Оставить предложение',
-              href: '#',
-            },
-          ]
-        },
-        {
-          title: 'Поможем',
-          links: [
-            {
-              title: 'Инструкции',
-              href: '#',
-            },
-            {
-              title: 'Вопросы ответы',
-              href: '#',
-            },
-            {
-              title: 'Наш блог',
-              href: '#',
-            },
-          ]
-        },
-      ],
+    data() {
+        return {
+            items: [
+                {
+                    title: 'Расскажем',
+                    links: [
+                        {
+                            title: 'Отзывы',
+                            href: '#',
+                        }
+                    ]
+                },
+                {
+                    title: 'Поддержим',
+                    links: [
+                        {
+                            title: 'Телеграм канал',
+                            href: '#',
+                        },
+                        {
+                            title: 'Помощь',
+                            href: '#',
+                        },
+                        {
+                            title: 'Оставить предложение',
+                            href: '#',
+                        },
+                    ]
+                },
+                {
+                    title: 'Поможем',
+                    links: [
+                        {
+                            title: 'Инструкции',
+                            href: '#',
+                        },
+                        {
+                            title: 'Вопросы ответы',
+                            href: '#',
+                        },
+                        {
+                            title: 'Наш блог',
+                            href: '#',
+                        },
+                    ]
+                },
+            ],
+        }
     }
-  }
 }
 </script>
 
