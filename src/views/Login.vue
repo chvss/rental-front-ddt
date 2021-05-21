@@ -60,12 +60,14 @@ export default {
     }),
 
     methods: {
-        login: function () {
-            let email = this.email;
-            let password = this.password;
-            this.$store.dispatch('login', {email, password})
-                .then(() => this.$router.push('/'))
-                .catch(err => console.log(err));
+        login: async function () {
+            const email = this.email;
+            const password = this.password;
+            const result = await this.$store.dispatch('login', {email, password});
+            console.log(result);
+            if (result) {
+                this.$router.push('/');
+            }
         }
     },
 

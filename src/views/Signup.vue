@@ -83,7 +83,7 @@ export default {
     }),
 
     methods: {
-        login: function () {
+        login: async function () {
             let data = {
                 firstname: this.firstname,
                 lastname: this.lastname,
@@ -91,9 +91,10 @@ export default {
                 password: this.password,
             };
 
-            this.$store.dispatch('register', data)
-                .then(() => this.$router.push('/'))
-                .catch(err => console.log(err));
+            const result = await this.$store.dispatch('register', data);
+            if (result) {
+                this.$router.push('/');
+            }
         }
     },
 
