@@ -95,7 +95,6 @@ export default {
         city: null,
         password: null,
 
-        username: '',
         rules: {
             required: v => !!v || 'Не может быть пустым',
         },

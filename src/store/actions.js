@@ -3,13 +3,12 @@ import Vue from 'vue';
 export default {
     login({commit}, user) {
         return new Promise((resolve, reject) => {
-            Vue.axios({url: '/rest-auth/login/', data: user, method: 'POST'})
+            Vue.axios({url: '/auth/login/', data: user, method: 'POST'})
                 .then(resp => {
                     const token = resp.data.key;
-                    const user = resp.data.user;
                     localStorage.setItem('token', token);
                     Vue.axios.defaults.headers.common['Authorization'] = token;
-                    commit('auth_success', token, user);
+                    commit('auth_success', token);
                     resolve(resp);
                 })
                 .catch(err => {
@@ -44,5 +43,13 @@ export default {
             delete Vue.axios.defaults.headers.common['Authorization'];
             resolve();
         })
-    }
+    },
+    async fetchUser(ctx) {
+        Vue.axios.get('/auth/user/').then(res => {
+            ctx.commit('set_user', res.data)
+        }).catch(error => {
+            // errorNotify('Ошибка получения пользователя');
+            console.log(error);
+        });
+    },
 }

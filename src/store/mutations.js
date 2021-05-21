@@ -1,8 +1,7 @@
 export default {
-    auth_success(state, token, user) {
+    auth_success(state, token) {
         state.authStatus = 'success';
         state.token = token;
-        state.user = user;
     },
     auth_error(state) {
         state.authStatus = 'error';
@@ -10,5 +9,8 @@ export default {
     logout(state) {
         state.status = '';
         state.token = '';
+    },
+    set_user(state, user) {
+        state.user = user;
     },
 }
