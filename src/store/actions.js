@@ -1,40 +1,34 @@
 import Vue from 'vue';
+import AuthApi from '../api/methods/auth';
 
 export default {
-    login({commit}, user) {
-        return new Promise((resolve, reject) => {
-            Vue.axios({url: '/auth/login/', data: user, method: 'POST'})
-                .then(resp => {
-                    const token = resp.data.key;
-                    localStorage.setItem('token', token);
-                    Vue.axios.defaults.headers.common['Authorization'] = token;
-                    commit('auth_success', token);
-                    resolve(resp);
-                })
-                .catch(err => {
-                    commit('auth_error');
-                    localStorage.removeItem('token');
-                    reject(err);
-                });
-        });
+    async login({commit}, user) {
+        const { data, errors } = await AuthApi.Login(user);
+        console.log(data, errors);
+        if (errors) {
+            commit('auth_error');
+            localStorage.removeItem('token');
+            console.log(errors);
+            return false;
+        }
+        const token = data.key;
+        localStorage.setItem('token', token);
+        Vue.axios.defaults.headers.common['Authorization'] = token;
+        commit('auth_success', token);
+        return true;
     },
-    register({commit}, user) {
-        return new Promise((resolve, reject) => {
-            Vue.axios({url: '/rest-auth/register/', data: user, method: 'POST'})
-                .then(resp => {
-                    const token = resp.data.token;
-                    const user = resp.data.user;
-                    localStorage.setItem('token', token);
-                    Vue.axios.defaults.headers.common['Authorization'] = token;
-                    commit('auth_success', token, user);
-                    resolve(resp);
-                })
-                .catch(err => {
-                    commit('auth_error', err);
-                    localStorage.removeItem('token');
-                    reject(err);
-                });
-        });
+    async register({commit}, user) {
+        const {data, errors} = await AuthApi.Register(user);
+        if (errors) {
+            commit('auth_error', errors);
+            localStorage.removeItem('token');
+            return false;
+        }
+        const token = data.token;
+        localStorage.setItem('token', token);
+        Vue.axios.defaults.headers.common['Authorization'] = token;
+        commit('auth_success', token, data.user);
+        return true;
     },
     logout({commit}) {
         return new Promise((resolve) => {

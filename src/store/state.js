@@ -9,4 +9,5 @@ export default {
         city: null,
     },
     companies: [],
+    errors: {}
 };
