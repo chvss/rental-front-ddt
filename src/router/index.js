@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import store from '../store'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from '../store';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
     mode: 'history',
@@ -54,13 +54,18 @@ const router = new VueRouter({
             component: () => import('../views/Signup')
         },
         {
+            path: '/map',
+            name: 'map',
+            component: () => import('../views/TestMaps')
+        },
+        {
             path: '*',
             component: () => import('../views/PageNotFound')
         }
     ]
-})
+});
 
-export default router
+export default router;
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -72,4 +77,4 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-})
+});

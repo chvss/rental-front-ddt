@@ -49,5 +49,5 @@ export default {
             default: 'text-accent',
         }
     },
-}
+};
 </script>

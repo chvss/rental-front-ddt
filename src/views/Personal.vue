@@ -30,5 +30,5 @@ export default {
         UserPersonalForm,
         UserPasswordForm,
     }
-}
+};
 </script>

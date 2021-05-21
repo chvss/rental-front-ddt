@@ -77,17 +77,17 @@ export default {
                 email: this.email,
                 phone: this.phone,
                 city: this.city,
-            }
+            };
 
             // TODO: заглушка на изменение личных данных
             this.$store.dispatch('changePersonalInfo', data)
                 .then(() => this.$router.push('/'))
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         }
     },
 
     components: {
         FormSubmitButton,
     }
-}
+};
 </script>

@@ -73,7 +73,7 @@
 import HeaderButton from '@/components/elements/HeaderButton';
 import HeaderButtonIcon from '@/components/elements/HeaderButtonIcon';
 
-import {mapGetters} from 'vuex'
+import {mapGetters} from 'vuex';
 
 export default {
     name: 'Header',
@@ -95,6 +95,10 @@ export default {
                 title: 'Личный кабинет',
                 href: '/personal'
             },
+            {
+                title: 'Карта',
+                href: '/map'
+            }
         ],
 
         menuGuestRight: [
@@ -119,8 +123,8 @@ export default {
         logout: function () {
             this.$store.dispatch('logout')
                 .then(() => {
-                    this.$router.push('/login')
-                })
+                    this.$router.push('/login');
+                });
         },
     },
 
@@ -133,5 +137,5 @@ export default {
     created: function () {
         console.log('isLoggedIn: ' + this.isLoggedIn);
     }
-}
+};
 </script>

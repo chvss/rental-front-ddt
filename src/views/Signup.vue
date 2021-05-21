@@ -110,16 +110,16 @@ export default {
                 phone: this.phone,
                 city: this.city,
                 password: this.password,
-            }
+            };
 
             this.$store.dispatch('register', data)
                 .then(() => this.$router.push('/'))
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         }
     },
 
     components: {
         FormSubmitButton,
     }
-}
+};
 </script>

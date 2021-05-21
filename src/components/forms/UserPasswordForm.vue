@@ -69,17 +69,17 @@ export default {
                 password: this.password,
                 newPassword: this.newPassword,
                 repeatNewPassword: this.repeatNewPassword,
-            }
+            };
 
             // TODO: заглушка на смену пароля
             this.$store.dispatch('changePassword', data)
                 .then(() => this.$router.push('/'))
-                .catch(err => console.log(err))
+                .catch(err => console.log(err));
         }
     },
 
     components: {
         FormSubmitButton,
     }
-}
+};
 </script>

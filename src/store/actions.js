@@ -16,8 +16,8 @@ export default {
                     commit('auth_error');
                     localStorage.removeItem('token');
                     reject(err);
-                })
-        })
+                });
+        });
     },
     register({commit}, user) {
         return new Promise((resolve, reject) => {
@@ -34,8 +34,8 @@ export default {
                     commit('auth_error', err);
                     localStorage.removeItem('token');
                     reject(err);
-                })
-        })
+                });
+        });
     },
     logout({commit}) {
         return new Promise((resolve) => {
@@ -43,6 +43,6 @@ export default {
             localStorage.removeItem('token');
             delete Vue.axios.defaults.headers.common['Authorization'];
             resolve();
-        })
+        });
     }
-}
+};
