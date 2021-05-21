@@ -1,5 +1,6 @@
 <template>
     <v-app>
+        <notifications group="common"/>
         <Header/>
         <Main/>
         <Footer/>

@@ -3,7 +3,7 @@ export default {
     token: localStorage.getItem('token') || '',
     user: {
         firstname: null,
-        secondname: null,
+        lastname: null,
         email: null,
         phone: null,
         city: null,

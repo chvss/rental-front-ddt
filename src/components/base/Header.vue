@@ -96,6 +96,10 @@ export default {
                 href: '/personal'
             },
             {
+                title: 'Бизнесс-аккаунт',
+                href: '/business-account'
+            },
+            {
                 title: 'Карта',
                 href: '/map'
             }

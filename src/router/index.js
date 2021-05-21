@@ -51,6 +51,14 @@ const router = new VueRouter({
                 requiresAuth: true
             }
         },
+        {
+            path: '/business-account',
+            name: 'business-account',
+            component: () => import('../views/BusinessAccount'),
+            meta: {
+                requiresAuth: true
+            }
+        },
 
 
         {

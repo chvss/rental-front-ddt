@@ -25,7 +25,7 @@
 
                 <!-- ФАМИЛИЯ -->
                 <v-text-field
-                  v-model="secondname"
+                  v-model="lastname"
                   :rules="[rules.required]"
                   label="Фамилия"
                   required
@@ -36,22 +36,6 @@
                   v-model="email"
                   :rules="[rules.required]"
                   label="Email"
-                  required
-                ></v-text-field>
-
-                <!-- ТЕЛЕФОН -->
-                <v-text-field
-                  v-model="phone"
-                  :rules="[rules.required]"
-                  label="Телефон"
-                  required
-                ></v-text-field>
-
-                <!-- ГОРОД -->
-                <v-text-field
-                  v-model="city"
-                  :rules="[rules.required]"
-                  label="Город"
                   required
                 ></v-text-field>
 
@@ -89,10 +73,8 @@ export default {
         valid: false,
 
         firstname: null,
-        secondname: null,
+        lastname: null,
         email: null,
-        phone: null,
-        city: null,
         password: null,
 
         rules: {
@@ -104,10 +86,8 @@ export default {
         login: function () {
             let data = {
                 firstname: this.firstname,
-                secondname: this.secondname,
+                lastname: this.lastname,
                 email: this.email,
-                phone: this.phone,
-                city: this.city,
                 password: this.password,
             };
 

@@ -11,6 +11,10 @@ export default {
         state.token = '';
     },
     set_user(state, user) {
-        state.user = user;
+        state.user.firstname = user.first_name;
+        state.user.lastname = user.last_name;
+        state.user.email = user.email;
+        state.user.phone = user.phone;
+        state.user.city = user.city;
     },
 };

@@ -6,14 +6,16 @@
                 <v-text-field
                     v-model="user.firstname"
                     :rules="[rules.required]"
+                    :counter="50"
                     label="Имя"
                     required
                 ></v-text-field>
 
                 <!-- ФАМИЛИЯ -->
                 <v-text-field
-                    v-model="user.secondname"
+                    v-model="user.lastname"
                     :rules="[rules.required]"
+                    :counter="50"
                     label="Фамилия"
                     required
                 ></v-text-field>
@@ -22,6 +24,7 @@
                 <v-text-field
                     v-model="user.email"
                     :rules="[rules.required]"
+                    :counter="50"
                     label="Email"
                     required
                 ></v-text-field>
@@ -30,6 +33,7 @@
                 <v-text-field
                     v-model="user.phone"
                     :rules="[rules.required]"
+                    :counter="15"
                     label="Телефон"
                     required
                 ></v-text-field>
@@ -37,9 +41,8 @@
                 <!-- ГОРОД -->
                 <v-text-field
                     v-model="user.city"
-                    :rules="[rules.required]"
+                    :counter="255"
                     label="Город"
-                    required
                 ></v-text-field>
 
                 <div class="text-center">
@@ -52,44 +55,49 @@
 
 <script>
 import FormSubmitButton from '@/components/elements/FormSubmitButton';
+import {mapGetters} from 'vuex';
 
 export default {
     name: 'UserPersonalForm',
 
     data() {
         return {
-            user: {
-                firstname: this.$store.state.user.firstname,
-                secondname: this.$store.state.user.secondname,
-                email: this.$store.state.user.email,
-                phone: this.$store.state.user.phone,
-                city: this.$store.state.user.city,
-            },
+            user: null,
             rules: {
                 required: v => !!v || 'Не может быть пустым',
             },
         };
     },
 
+    computed: {
+        ...mapGetters([
+            'authUser',
+        ])
+    },
+
     methods: {
         submit: function () {
             let data = {
-                firstname: this.user.firstname,
-                secondname: this.user.secondname,
+                first_name: this.user.firstname,
+                last_name: this.user.lastname,
                 email: this.user.email,
                 phone: this.user.phone,
                 city: this.user.city,
             };
 
-            // TODO: заглушка на изменение личных данных
-            this.$store.dispatch('changePersonalInfo', data)
-                .then(() => this.$router.push('/'))
+            this.$store.dispatch('updateUserProfile', data)
+                .then(() => {
+                })
                 .catch(err => console.log(err));
         }
     },
 
     components: {
         FormSubmitButton,
+    },
+
+    created() {
+        this.user = this.authUser;
     }
 };
 </script>
