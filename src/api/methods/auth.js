@@ -12,6 +12,16 @@ class AuthApi {
     Register(params) {
         return axios.post('/rest-auth/register/', params);
     }
+
+    @Format
+    FetchUser() {
+        return axios.get('/auth/user/');
+    }
+
+    @Format
+    UpdateUserProfile(params) {
+        return axios.put('/auth/user/', params);
+    }
 }
 
 export default new AuthApi();

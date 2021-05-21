@@ -12,12 +12,10 @@ function errorNotify(text, title = 'Ошибка', type = 'error') {
 
 export default {
     async login({commit}, user) {
-        const { data, errors } = await AuthApi.Login(user);
-        console.log(data, errors);
+        const {data, errors} = await AuthApi.Login(user);
         if (errors) {
             commit('auth_error');
             localStorage.removeItem('token');
-            console.log(errors);
             return false;
         }
         const token = data.key;
@@ -39,7 +37,7 @@ export default {
         commit('auth_success', token, data.user);
         return true;
     },
-    logout({commit}) {
+    async logout({commit}) {
         return new Promise((resolve) => {
             commit('logout');
             localStorage.removeItem('token');
@@ -47,20 +45,24 @@ export default {
             resolve();
         });
     },
-    async fetchUser(ctx) {
-        Vue.axios.get('/auth/user/').then(res => {
-            ctx.commit('set_user', res.data);
-        }).catch(error => {
+    async fetchUser({commit}) {
+        const {data, errors} = await AuthApi.FetchUser();
+        if (errors) {
             errorNotify('Не удалось получить данные о пользователе');
-            console.log(error);
-        });
+            console.log(errors);
+            return false;
+        }
+        commit('set_user', data);
+        return true;
     },
-    async updateUserProfile(ctx, user) {
-        Vue.axios.put('/auth/user/', user).then(res => {
-            ctx.commit('set_user', res.data);
-        }).catch(error => {
+    async updateUserProfile({commit}, user) {
+        const {data, errors} = await AuthApi.UpdateUserProfile(user);
+        if (errors) {
             errorNotify('Ошибка при обновлении информации о пользователе');
-            console.log(error);
-        });
+            console.log(errors);
+            return false;
+        }
+        commit('set_user', data);
+        return true;
     },
 };
