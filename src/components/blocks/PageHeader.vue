@@ -1,5 +1,5 @@
 <template>
-  <div class="page-header">
+  <div class="page-header mb-4">
     <div class="page-title display-1 mb-4 text-center">
       {{ title }}
     </div>
