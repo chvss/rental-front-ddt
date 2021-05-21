@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import PageHeader from "@/components/blocks/PageHeader";
-import UserPersonalForm from "@/components/forms/UserPersonalForm";
-import UserPasswordForm from "@/components/forms/UserPasswordForm";
+import PageHeader from '@/components/blocks/PageHeader';
+import UserPersonalForm from '@/components/forms/UserPersonalForm';
+import UserPasswordForm from '@/components/forms/UserPasswordForm';
 
 export default {
-  name: "Personal",
+  name: 'Personal',
 
   components: {
     PageHeader,

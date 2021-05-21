@@ -21,33 +21,33 @@
 
 <script>
 export default {
-  name: "HeaderButton",
+    name: 'HeaderButton',
 
-  props: {
-    icon: {
-      type: String,
-      required: true,
+    props: {
+        icon: {
+            type: String,
+            required: true,
+        },
+        badgeValue: {
+            type: Number,
+            default: 0,
+        },
+        color: {
+            type: String,
+            default: '#444444',
+        },
+        classes: {
+            type: String,
+            default: 'mx-4',
+        },
+        href: {
+            type: String,
+            default: '#',
+        },
+        activeClass: {
+            type: String,
+            default: 'text-accent',
+        }
     },
-    badgeValue: {
-      type: Number,
-      default: 0,
-    },
-    color: {
-      type: String,
-      default: '#444444',
-    },
-    classes: {
-      type: String,
-      default: 'mx-4',
-    },
-    href: {
-      type: String,
-      default: '#',
-    },
-    activeClass: {
-      type: String,
-      default: 'text-accent',
-    }
-  },
 }
 </script>

@@ -12,16 +12,16 @@
 
 <script>
 export default {
-  name: "PageHeader",
+    name: 'PageHeader',
 
-  props: {
-    title: {
-      type: String,
-      required: true,
+    props: {
+        title: {
+            type: String,
+            required: true,
+        },
+        subtitle: {
+            type: String,
+        },
     },
-    subtitle: {
-      type: String,
-    },
-  },
 }
 </script>

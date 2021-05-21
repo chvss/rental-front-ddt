@@ -13,6 +13,6 @@
 
 <script>
 export default {
-  name: "Favorite"
+    name: 'Favorite'
 }
 </script>

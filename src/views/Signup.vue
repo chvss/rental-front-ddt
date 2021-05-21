@@ -79,47 +79,47 @@
 </template>
 
 <script>
-import FormSubmitButton from "@/components/elements/FormSubmitButton";
+import FormSubmitButton from '@/components/elements/FormSubmitButton';
 
 export default {
-  name: "Signup",
+    name: 'Signup',
 
-  data: () => ({
-    show: false,
-    valid: false,
+    data: () => ({
+        show: false,
+        valid: false,
 
-    firstname: null,
-    secondname: null,
-    email: null,
-    phone: null,
-    city: null,
-    password: null,
+        firstname: null,
+        secondname: null,
+        email: null,
+        phone: null,
+        city: null,
+        password: null,
 
-    username: '',
-    rules: {
-      required: v => !!v || 'Не может быть пустым',
+        username: '',
+        rules: {
+            required: v => !!v || 'Не может быть пустым',
+        },
+    }),
+
+    methods: {
+        login: function () {
+            let data = {
+                firstname: this.firstname,
+                secondname: this.secondname,
+                email: this.email,
+                phone: this.phone,
+                city: this.city,
+                password: this.password,
+            }
+
+            this.$store.dispatch('register', data)
+                .then(() => this.$router.push('/'))
+                .catch(err => console.log(err))
+        }
     },
-  }),
 
-  methods: {
-    login: function () {
-      let data = {
-        firstname: this.firstname,
-        secondname: this.secondname,
-        email: this.email,
-        phone: this.phone,
-        city: this.city,
-        password: this.password,
-      }
-
-      this.$store.dispatch('register', data)
-        .then(() => this.$router.push('/'))
-        .catch(err => console.log(err))
+    components: {
+        FormSubmitButton,
     }
-  },
-
-  components: {
-    FormSubmitButton,
-  }
 }
 </script>

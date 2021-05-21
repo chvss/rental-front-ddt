@@ -14,7 +14,7 @@ Axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const token = localStorage.getItem('token')
 if (token) {
-  Axios.defaults.headers.common['Authorization'] = 'Token ' + token
+    Axios.defaults.headers.common['Authorization'] = 'Token ' + token
 }
 
 Vue.use(VueAxios, Axios)
@@ -23,8 +23,8 @@ Vue.use(Notifications)
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
+    router,
+    store,
+    vuetify,
+    render: h => h(App)
 }).$mount('#app')

@@ -13,29 +13,29 @@
 
 <script>
 export default {
-  name: "HeaderButton",
+    name: 'HeaderButton',
 
-  props: {
-    text: {
-      type: String,
-      required: true,
+    props: {
+        text: {
+            type: String,
+            required: true,
+        },
+        color: {
+            type: String,
+            default: '#444444',
+        },
+        classes: {
+            type: String,
+            default: 'mx-4',
+        },
+        href: {
+            type: String,
+            default: '#',
+        },
+        activeClass: {
+            type: String,
+            default: 'text-accent',
+        }
     },
-    color: {
-      type: String,
-      default: '#444444',
-    },
-    classes: {
-      type: String,
-      default: 'mx-4',
-    },
-    href: {
-      type: String,
-      default: '#',
-    },
-    activeClass: {
-      type: String,
-      default: 'text-accent',
-    }
-  },
 }
 </script>
