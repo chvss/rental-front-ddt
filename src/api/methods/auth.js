@@ -10,7 +10,7 @@ class AuthApi {
 
     @Format
     Register(params) {
-        return axios.post('/rest-auth/register/', params);
+        return axios.post('/auth/', params);
     }
 
     @Format

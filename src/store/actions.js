@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import AuthApi from '../api/methods/auth';
+import CompanyApi from '../api/methods/company';
 
 function errorNotify(text, title = 'Ошибка', type = 'error') {
     Vue.notify({
@@ -65,4 +66,18 @@ export default {
         commit('set_user', data);
         return true;
     },
+    async createBusinessAccount({commit}, data) {
+        const {errors} = await CompanyApi.CreateBusinessAccount(data);
+        if (errors) {
+            console.log(errors);
+            commit('setErrors', errors);
+        }
+    },
+    async getCompany({commit}) {
+        const {data, errors} = await CompanyApi.GetCompany();
+        if (errors) {
+            console.log(errors);
+        }
+        commit('setUserCompany', data);
+    }
 };

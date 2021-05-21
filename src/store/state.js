@@ -7,6 +7,7 @@ export default {
         email: null,
         phone: null,
         city: null,
+        company: {}
     },
     companies: [],
     errors: {}

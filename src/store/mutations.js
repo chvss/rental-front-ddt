@@ -17,4 +17,13 @@ export default {
         state.user.phone = user.phone;
         state.user.city = user.city;
     },
+    setUserCompany(state, data) {
+        state.user.company = data;
+    },
+    setErrors(state, data) {
+        state.errors = data;
+    },
+    clearErrors(state) {
+        state.errors = {};
+    }
 };
