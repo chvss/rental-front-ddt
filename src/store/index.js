@@ -6,6 +6,8 @@ import mutations from '@/store/mutations';
 import actions from '@/store/actions';
 import getters from '@/store/getters';
 
+import Offer from './offers';
+
 Vue.use(Vuex);
 
 // TODO: Успешный ответ, раскоментить если потребуется
@@ -44,5 +46,7 @@ export default new Vuex.Store({
     mutations: mutations,
     actions: actions,
     getters: getters,
-    modules: {}
+    modules: {
+        Offer
+    }
 });

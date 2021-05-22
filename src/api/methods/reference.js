@@ -2,12 +2,15 @@ import axios from 'axios';
 import Format from '../format';
 
 class ReferenceApi {
-
     @Format
-    Cities() {
-        return axios.get('/reference/city/');
+    GetCategoryList() {
+        return axios.get('/reference/category/');
     }
 
+    @Format
+    GetProductsByCategoryId(id) {
+        return axios.get(`/reference/category/${id}/product/`);
+    }
 }
 
 export default new ReferenceApi();

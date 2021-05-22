@@ -17,6 +17,8 @@ export default {
         state.user.phone = user.phone;
         state.user.city = user.address.city;
 
+        // state.user.company = user.company || {};
+
         state.user.company.id = user.company
             ? user.company.id
             : null;
