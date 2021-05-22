@@ -32,10 +32,8 @@
                 <!-- ТЕЛЕФОН -->
                 <v-text-field
                     v-model="user.phone"
-                    :rules="[rules.required]"
                     :counter="15"
                     label="Телефон"
-                    required
                 ></v-text-field>
 
                 <!-- ГОРОД -->
@@ -85,6 +83,7 @@ export default {
 
     methods: {
         ...mapActions([
+            'fetchUser',
             'fetchCities',
         ]),
         submit: function () {
@@ -110,6 +109,7 @@ export default {
     },
 
     created() {
+        this.fetchUser();
         this.fetchCities();
         this.user = this.authUser;
     }

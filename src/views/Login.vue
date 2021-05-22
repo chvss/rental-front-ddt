@@ -45,6 +45,7 @@
 
 <script>
 import FormSubmitButton from '@/components/elements/FormSubmitButton';
+import {mapActions} from 'vuex';
 
 export default {
     name: 'Login',
@@ -52,7 +53,7 @@ export default {
     data: () => ({
         show: false,
         valid: false,
-        email: 'admin@yandex.ru',
+        email: null,
         password: '',
         rules: {
             required: v => !!v || 'Не может быть пустым',
@@ -60,6 +61,9 @@ export default {
     }),
 
     methods: {
+        ...mapActions([
+            'fetchUser',
+        ]),
         login: async function () {
             const email = this.email;
             const password = this.password;

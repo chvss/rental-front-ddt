@@ -15,7 +15,9 @@ export default {
         state.user.lastname = user.last_name;
         state.user.email = user.email;
         state.user.phone = user.phone;
-        state.user.city = user.address.city;
+        state.user.city = user.address
+            ? user.address.city
+            : null;
 
         // state.user.company = user.company || {};
 
@@ -45,5 +47,17 @@ export default {
     },
     setRentals(state, rentals) {
         state.rentals = rentals;
+    },
+    setAllRentals(state, allRentals) {
+        state.allRentals = allRentals;
+    },
+    setCompanies(state, companies) {
+        state.companies = companies;
+    },
+    setTypeViewCompanies(state, status) {
+        state.typeViewCompanies = status;
+    },
+    setMarkerRental(state, markerRental) {
+        state.markerRental = markerRental;
     },
 };

@@ -16,6 +16,9 @@ export default {
         }
     },
     rentals: [],
+    allRentals: [],
+    markerRental: null,
     companies: [],
-    cities: []
+    typeViewCompanies: 'list',
+    cities: [],
 };

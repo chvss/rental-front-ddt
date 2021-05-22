@@ -1,26 +1,25 @@
 <template>
-    <div>
-        <yandex-map
-            zoom=10
+    <yandex-map
+        zoom=10
+        :coords="coords"
+        @click="getCoordsByClick"
+    >
+        <ymap-marker
+            v-if="isSelectable"
+            :key="123"
             :coords="coords"
-            @click="getCoordsByClick"
-        >
+            marker-id="123"
+        ></ymap-marker>
+        <div v-else>
             <ymap-marker
-                v-if="isSelectable"
-                :key="123"
-                :coords="coords"
-                marker-id="123"
+                v-for="item in objects"
+                :key="item.id"
+                :coords="item.coords"
+                marker-id="iem.id"
+                @click="$emit('click-marker', item.id)"
             ></ymap-marker>
-            <div v-else>
-                <ymap-marker
-                    v-for="item in objects"
-                    :key="item.id"
-                    marker-id="iem.id"
-                    :coords="item.coords"
-                ></ymap-marker>
-            </div>
-        </yandex-map>
-    </div>
+        </div>
+    </yandex-map>
 </template>
 
 <script>
@@ -54,8 +53,3 @@ export default {
     }
 };
 </script>
-
-<style scoped lang="sass">
-.ymap-container
-    height: 400px
-</style>

@@ -11,7 +11,7 @@
         ></rental>
 
         <!-- Модалка создания/удаления филиала -->
-        <v-row justify="center" class="mt-4">
+        <v-row justify="center" class="mt-4 modal">
             <v-dialog
                 v-model="dialog"
                 persistent

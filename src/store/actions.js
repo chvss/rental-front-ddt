@@ -81,6 +81,26 @@ export default {
     },
 
     // ***************************************************   COMPANY   *************************************************
+    async fetchCompanies({commit}) {
+        const {data, errors} = await CompanyApi.GetCompanies();
+        if (errors) {
+            errorNotify('Не удалось получить список компаний');
+            console.log(errors);
+            return false;
+        }
+        commit('setCompanies', data);
+        return true;
+    },
+    async fetchAllRentals({commit}) {
+        const {data, errors} = await CompanyApi.AllRentals();
+        if (errors) {
+            errorNotify('Не удалось получить список филиалов');
+            console.log(errors);
+            return false;
+        }
+        commit('setAllRentals', data);
+        return true;
+    },
     async createBusinessAccount({commit}, params) {
         const {data, errors} = await CompanyApi.CreateBusinessAccount(params);
         console.log(data);
@@ -159,4 +179,13 @@ export default {
         ctx.commit('setRentals', rentals);
         return true;
     },
+    async rentalPointsDetail({commit}, id) {
+        const {data, errors} = await CompanyApi.RentalById(id);
+        if (errors) {
+            errorNotify('Ошибка обновления филиала компании');
+            return false;
+        }
+        commit('setMarkerRental', data);
+        return true;
+    }
 };
