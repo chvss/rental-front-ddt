@@ -49,7 +49,7 @@
                         <v-col>
                             <v-text-field
                                 label="Количество"
-                                @input="value => setCount(value)"
+                                @input="value => updateCount(value)"
                                 :value="count"
                             ></v-text-field>
                         </v-col>
@@ -116,7 +116,7 @@
                                 clearable
                                 outlined
                                 label="Выберите точку аренды"
-                                @change="value => setSelectedRentalPointId(value)"
+                                @change="value => setSelectedRentalPointId({value, rentalPointList})"
                                 :items="rentalPointNames"
                             ></v-combobox>
                         </v-col>
@@ -181,7 +181,7 @@ export default {
             return this.productList.map(item => item.name);
         },
         rentalPointNames() {
-            return this.rentalPointList.map(item => item.address);
+            return (this.rentalPointList || []).map(({address}) => address.address);
         },
         isSelectProductDisable() {
             return this.selectedCategoryId === null;
@@ -203,7 +203,7 @@ export default {
             'selectedCategoryId'
         ]),
         ...mapState({
-            rentalPointList: state => state.user.company.rentalPoints,
+            rentalPointList: state => state.user.company.rental_points,
         })
     },
 
@@ -233,8 +233,11 @@ export default {
             this.setSelectedCategoryId(value);
             this.fetchProductsByCategoryId(this.selectedCategoryId);
         },
-        test: function (q) {
-            console.log(q);
+        updateCount: function (value) {
+            const regex = /^[0-9]+$/;
+            if (value.match(regex)) {
+                this.setCount(value);
+            }
         }
     }
 };

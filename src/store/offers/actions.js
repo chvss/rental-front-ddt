@@ -3,7 +3,19 @@ import ReferenceApi from '../../api/methods/reference';
 
 export default {
     async createOffer({commit}, newOffer) {
-        const {errors} = await OfferApi.CreateOffer(newOffer);
+        const data = {
+            description: newOffer.description,
+            count: newOffer.count,
+            is_for_child: newOffer.isForChild,
+            is_female: newOffer.isFemale,
+            is_male: newOffer.isMale,
+            is_unisex: newOffer.isUnisex,
+            product: newOffer.selectedProductId,
+            rental_point: newOffer.selectedRentalPointId,
+        };
+        const bodyFormData = new FormData();
+        bodyFormData.append('data', JSON.stringify(data));
+        const {errors} = await OfferApi.CreateOffer(bodyFormData);
         if (errors) {
             commit('setErrors', errors);
         }
@@ -25,10 +37,7 @@ export default {
         commit('setDescription', data);
     },
     setCount({commit}, data) {
-        const regex = /^[0-9]+$/;
-        if (data.match(regex)) {
-            commit('setCount', data);
-        }
+        commit('setCount', data);
     },
     changeIsForChild({commit}) {
         commit('changeIsForChild');
@@ -66,8 +75,8 @@ export default {
         const {id} = state.productList.find(item => item.name === data);
         commit('setSelectedProductId', id);
     },
-    setSelectedRentalPointId({commit, state}, data) {
-        const {id} = state.rentalPointList.find(item => item.address === data);
+    setSelectedRentalPointId({ commit }, {value, rentalPointList}) {
+        const {id} = ((rentalPointList || []).find(item => item.address.address === value) || {});
         commit('setSelectedRentalPointId', id);
     }
 

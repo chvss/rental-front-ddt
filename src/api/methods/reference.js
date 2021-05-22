@@ -11,6 +11,11 @@ class ReferenceApi {
     GetProductsByCategoryId(id) {
         return axios.get(`/reference/category/${id}/product/`);
     }
+
+    @Format
+    Cities() {
+        return axios.get('/reference/city/');
+    }
 }
 
 export default new ReferenceApi();
