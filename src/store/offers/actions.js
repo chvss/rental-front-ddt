@@ -78,6 +78,15 @@ export default {
     setSelectedRentalPointId({ commit }, {value, rentalPointList}) {
         const {id} = ((rentalPointList || []).find(item => item.address.address === value) || {});
         commit('setSelectedRentalPointId', id);
-    }
+    },
 
+    async fetchOffersList({commit}) {
+        const {data, errors} = await OfferApi.GetOfferList();
+        if (errors) {
+            commit('setErrors', errors);
+        }
+        if (data.length) {
+            commit('setOffersList', data);
+        }
+    }
 };

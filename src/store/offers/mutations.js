@@ -53,6 +53,10 @@ export default {
         state.categoryList = [];
         state.selectedCategoryId = null;
         state.selectedRentalPointId = null;
+    },
+
+    setOffersList(state, data) {
+        state.offersList = [...data];
     }
 
 };

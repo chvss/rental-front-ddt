@@ -13,4 +13,6 @@ export default {
     selectedProductId: null,
     categoryList: [],
     selectedCategoryId: null,
+
+    offersList: [],
 };
