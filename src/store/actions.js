@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import AuthApi from '../api/methods/auth';
 import CompanyApi from '../api/methods/company';
+import ReferenceApi from '../api/methods/reference';
 
 function errorNotify(text, title = 'Ошибка', type = 'error') {
     Vue.notify({
@@ -108,5 +109,53 @@ export default {
         commit('setUserCompany', data);
         successNotify('Данные обновлены');
         return true;
-    }
+    },
+
+    // **************************************************   REFERENCE   ************************************************
+    async fetchCities({commit}) {
+        const {data, errors} = await ReferenceApi.Cities();
+        if (errors) {
+            errorNotify('Не удалось получить данные о пользователе');
+            console.log(errors);
+            return false;
+        }
+        commit('setCities', data);
+        return true;
+    },
+
+    // ****************************************************   RENTAL   *************************************************
+    async fetchRentals({commit}) {
+        await this.dispatch('getCompany');
+        const {data, errors} = await CompanyApi.Rentals(this.state.user.company.id);
+        if (errors) {
+            errorNotify('Ошибка получения филиалов компании');
+            return false;
+        }
+        commit('setRentals', data);
+        return true;
+    },
+    async createRental(ctx, params) {
+        const {data, errors} = await CompanyApi.RentalCreate(this.state.user.company.id, params);
+        if (errors) {
+            errorNotify('Ошибка создания филиала компании');
+            return false;
+        }
+
+        let rentals = ctx.state.rentals;
+        rentals.push(data);
+        ctx.commit('setRentals', rentals);
+        return true;
+    },
+    async updateRental(ctx, params) {
+        const {data, errors} = await CompanyApi.RentalUpdate(this.state.user.company.id, params.rental);
+        if (errors) {
+            errorNotify('Ошибка обновления филиала компании');
+            return false;
+        }
+
+        let rentals = ctx.state.rentals;
+        Object.assign(rentals[params.editedIndex], data);
+        ctx.commit('setRentals', rentals);
+        return true;
+    },
 };

@@ -37,5 +37,11 @@ export default {
     },
     clearErrors(state) {
         state.errors = {};
-    }
+    },
+    setCities(state, cities) {
+        state.cities = cities;
+    },
+    setRentals(state, rentals) {
+        state.rentals = rentals;
+    },
 };

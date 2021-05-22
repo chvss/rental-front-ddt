@@ -2,8 +2,8 @@
     <v-btn
         :color="color"
         :active-class="activeClass"
+        :class="classes"
         text
-        class="mt-2"
         @click="$emit('button-click')"
     >
         {{ text }}
@@ -22,6 +22,10 @@ export default {
         color: {
             type: String,
             default: 'red',
+        },
+        classes: {
+            type: String,
+            default: 'mx-4',
         },
         activeClass: {
             type: String,

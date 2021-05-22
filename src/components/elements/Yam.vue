@@ -48,8 +48,14 @@ export default {
         getCoordsByClick(e) {
             if (this.isSelectable) {
                 this.coords = e.get('coords');
+                this.$emit('selectable', this.coords);
             }
         }
     }
 };
 </script>
+
+<style scoped lang="sass">
+.ymap-container
+    height: 400px
+</style>

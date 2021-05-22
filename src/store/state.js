@@ -13,6 +13,8 @@ export default {
             description: null,
         }
     },
+    rentals: [],
     companies: [],
+    cities: [],
     errors: {}
 };
