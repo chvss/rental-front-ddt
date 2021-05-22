@@ -14,7 +14,10 @@ export default {
         }
     },
     rentals: [],
+    allRentals: [],
+    markerRental: null,
     companies: [],
+    typeViewCompanies: 'list',
     cities: [],
     errors: {}
 };

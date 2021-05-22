@@ -13,6 +13,11 @@ class CompanyApi {
     }
 
     @Format
+    GetCompanies() {
+        return axios.get('/company/board/');
+    }
+
+    @Format
     UpdateCompany(id, params) {
         return axios.put(`/company/${id}/`, params);
     }
@@ -30,6 +35,16 @@ class CompanyApi {
     @Format
     Rentals(id) {
         return axios.get(`/company/${id}/rental_points/`);
+    }
+
+    @Format
+    AllRentals() {
+        return axios.get('/company/rental_points/all/');
+    }
+
+    @Format
+    RentalById(id) {
+        return axios.get(`/company/rental_points/detail/${id}/`);
     }
 }
 
