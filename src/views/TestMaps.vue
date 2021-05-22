@@ -2,6 +2,7 @@
     <div>
         <Yam
             :is-selectable="true"
+            :is-one-point="true"
             :start-coords="centerMap"
             :rental-points="allRentalsCoords"
         />

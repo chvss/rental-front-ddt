@@ -5,7 +5,7 @@
                 <v-col
                     cols="6"
                     md="4"
-                    v-for="offer in (!isLoading ? offersList : [1, 2, 3, 4, 5, 6, 7, 8, 9])"
+                    v-for="offer in (!isLoading ? actualOfferList : [1, 2, 3, 4, 5, 6, 7, 8, 9])"
                     :key="offer.id"
                 >
                     <v-card v-if="!isLoading">
@@ -76,6 +76,12 @@ import {mapActions, mapState} from 'vuex';
 
 export default {
     name: 'OffersList',
+    props: {
+        filteredOffersList: {
+            type: Array,
+            default: () => []
+        }
+    },
     data: function () {
         return {
             isLoading: false
@@ -85,6 +91,12 @@ export default {
         ...mapState('Offer', [
             'offersList'
         ]),
+        actualOfferList() {
+            if (this.filteredOffersList.length) {
+                return this.filteredOffersList;
+            }
+            return this.offersList;
+        }
     },
     methods: {
         ...mapActions('Offer', [
@@ -100,9 +112,11 @@ export default {
         }
     },
     created: async function () {
-        this.$data.isLoading = true;
-        await this.fetchOffersList();
-        this.$data.isLoading = false;
+        if (!this.filteredOffersList.length) {
+            this.$data.isLoading = true;
+            await this.fetchOffersList();
+            this.$data.isLoading = false;
+        }
     }
 };
 </script>

@@ -38,8 +38,20 @@
                 class="overflow-y-auto"
                 max-height="600"
             >
-                <v-container style="height: 1000px;">
-
+                <v-container style="height: 1000px; margin-top: 125px">
+                    <v-card>
+                        <v-card-title>
+                            {{currentOffer.rental_point.address.city_name}}
+                        </v-card-title>
+                        <v-card-text>
+                            {{currentOffer.rental_point.address.address}}
+                            <Yam
+                                :start-coords="[currentOffer.rental_point.address.latitude, currentOffer.rental_point.address.longitude]"
+                                :is-selectable="false"
+                                :is-one-point="true"
+                            />
+                        </v-card-text>
+                    </v-card>
                 </v-container>
             </v-sheet>
         </v-card>
@@ -50,10 +62,11 @@
 <script>
 import {mapActions, mapState} from 'vuex';
 import ReservationDialog from '../components/modals/ReservationDialog';
+import Yam from '../components/elements/Yam';
 
 export default {
     name: 'OfferCard',
-    components: {ReservationDialog},
+    components: {Yam, ReservationDialog},
     data: function () {
         return {
             isLoading: false

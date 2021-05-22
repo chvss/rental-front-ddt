@@ -5,7 +5,7 @@
         @click="getCoordsByClick"
     >
         <ymap-marker
-            v-if="isSelectable"
+            v-if="isOnePoint"
             :key="123"
             :coords="coords"
             marker-id="123"
@@ -30,6 +30,9 @@ export default {
             default: () => []
         },
         isSelectable: {
+            default: false
+        },
+        isOnePoint: {
             default: false
         },
         rentalPoints: {
