@@ -4,8 +4,8 @@ import Format from '../format';
 class OfferApi {
 
     @Format
-    CreateOffer(params) {
-        return axios.post('/offer/', params);
+    CreateOffer(bodyFormData) {
+        return axios.post('/offer/', bodyFormData, {headers: { 'Content-Type': 'multipart/form-data' }});
     }
 
     @Format
