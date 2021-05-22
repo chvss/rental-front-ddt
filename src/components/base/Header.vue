@@ -6,20 +6,13 @@
         class="bg-gray header"
     >
         <div class="container d-flex align-center">
-            <v-row v-if="!isLoggedIn">
-                <v-toolbar-title class="mx-4">
-                    <router-link to="/" role="menuitem" class="text-decoration-none text-base">
-                        <span class="text-accent">Я</span>смогу<span class="text-accent">НА</span>йти<span
-                        class="text-accent">О</span>борудование
-                    </router-link>
-                </v-toolbar-title>
-            </v-row>
-            <v-row v-else>
-                <header-button
-                    text="Главная"
-                    href="/"
-                ></header-button>
-
+            <v-toolbar-title class="mx-4">
+                <router-link to="/" role="menuitem" class="text-decoration-none text-base">
+                    <span class="text-accent">Я</span>смогу<span class="text-accent">НА</span>йти<span
+                    class="text-accent">О</span>борудование
+                </router-link>
+            </v-toolbar-title>
+            <v-row>
                 <header-button
                     text="История"
                     href="/history"
