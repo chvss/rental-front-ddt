@@ -15,7 +15,7 @@ export default {
         state.user.lastname = user.last_name;
         state.user.email = user.email;
         state.user.phone = user.phone;
-        state.user.city = user.city;
+        state.user.city = user.address.city;
 
         state.user.company.id = user.company
             ? user.company.id

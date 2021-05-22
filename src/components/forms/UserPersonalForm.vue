@@ -39,12 +39,17 @@
                 ></v-text-field>
 
                 <!-- ГОРОД -->
-                <v-text-field
+                <v-select
+                    :items="cities"
+                    :rules="[rules.required]"
+                    :clearable="true"
                     v-model="user.city"
-                    :counter="255"
+                    item-text="name"
+                    item-value="id"
                     label="Город"
-                ></v-text-field>
-
+                    persistent-hint
+                    single-line
+                ></v-select>
                 <div class="text-center">
                     <FormSubmitButton text="Сохранить"/>
                 </div>
@@ -55,7 +60,7 @@
 
 <script>
 import FormSubmitButton from '@/components/elements/FormSubmitButton';
-import {mapGetters} from 'vuex';
+import {mapActions, mapGetters, mapState} from 'vuex';
 
 export default {
     name: 'UserPersonalForm',
@@ -70,19 +75,27 @@ export default {
     },
 
     computed: {
+        ...mapState([
+            'cities',
+        ]),
         ...mapGetters([
             'authUser',
         ])
     },
 
     methods: {
+        ...mapActions([
+            'fetchCities',
+        ]),
         submit: function () {
             let data = {
                 first_name: this.user.firstname,
                 last_name: this.user.lastname,
                 email: this.user.email,
                 phone: this.user.phone,
-                city: this.user.city,
+                address: {
+                    city: this.user.city,
+                },
             };
 
             this.$store.dispatch('updateUserProfile', data)
@@ -97,6 +110,7 @@ export default {
     },
 
     created() {
+        this.fetchCities();
         this.user = this.authUser;
     }
 };
