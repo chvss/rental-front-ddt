@@ -19,8 +19,6 @@ export default {
             ? user.address.city
             : null;
 
-        // state.user.company = user.company || {};
-
         state.user.company.id = user.company
             ? user.company.id
             : null;
@@ -60,4 +58,10 @@ export default {
     setMarkerRental(state, markerRental) {
         state.markerRental = markerRental;
     },
+    setOffersRentalPoints(state, offersRentalPoints) {
+        state.offersRentalPoints = offersRentalPoints;
+    },
+    setDialogEditOffer(state, dialogEditOffer) {
+        state.dialogEditOffer = dialogEditOffer;
+    }
 };

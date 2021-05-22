@@ -59,6 +59,11 @@ const router = new VueRouter({
                 requiresAuth: true
             }
         },
+        {
+            path: '/control-rental/:id/',
+            name: 'control-rental',
+            component: () => import('../views/ControlRental')
+        },
 
 
         {

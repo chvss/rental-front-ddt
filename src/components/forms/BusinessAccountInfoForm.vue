@@ -4,6 +4,7 @@
             <v-container>
                 <!-- НАЗВАНИЕ -->
                 <v-text-field
+                    outlined
                     v-model="company.name"
                     :rules="[rules.required]"
                     :counter="50"
@@ -14,6 +15,7 @@
                 <!-- ОПИСАНИЕ -->
                 <v-textarea
                     outlined
+                    rows="3"
                     v-model="company.description"
                     :counter="1024"
                     class="mt-4"

@@ -1,15 +1,5 @@
 <template>
     <div>
-        <!-- Список филиалов -->
-        <rental
-            v-for="(item, i) in rentals"
-            :key="i"
-            :number="i"
-            :item="item"
-            class="mb-4"
-            v-on:edit-rental="edit"
-        ></rental>
-
         <!-- Модалка создания/удаления филиала -->
         <v-row justify="center" class="mt-4 modal">
             <v-dialog
@@ -34,6 +24,7 @@
                     </v-card-title>
                     <v-card-text class="pb-0">
                         <v-container class="pb-0">
+                            <!-- ФОРМА -->
                             <v-form ref="form">
                                 <v-row>
                                     <!-- ТЕЛЕФОН -->
@@ -135,6 +126,16 @@
                 </v-card>
             </v-dialog>
         </v-row>
+
+        <!-- Список филиалов -->
+        <rental
+            v-for="(item, i) in rentals"
+            :key="i"
+            :number="i"
+            :item="item"
+            class="mb-6 mt-6"
+            v-on:edit-rental="edit"
+        ></rental>
     </div>
 </template>
 

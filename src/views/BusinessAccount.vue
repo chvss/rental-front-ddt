@@ -6,17 +6,14 @@
         </page-header>
 
         <v-row>
-            <v-col>
+            <v-col cols="1" md="1"></v-col>
+
+            <v-col cols="10" md="10">
                 <business-account-info-form></business-account-info-form>
-            </v-col>
-            <v-col>
                 <rentals-list></rentals-list>
             </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
-                <OfferDialog/>
-            </v-col>
+
+            <v-col cols="1" md="1"></v-col>
         </v-row>
     </div>
 </template>
@@ -25,13 +22,11 @@
 import PageHeader from '@/components/blocks/PageHeader';
 import RentalsList from '@/components/blocks/RentalsList';
 import BusinessAccountInfoForm from '@/components/forms/BusinessAccountInfoForm';
-import OfferDialog from '../components/modals/OfferDialog';
 
 export default {
     name: 'BusinessAccount',
 
     components: {
-        OfferDialog,
         PageHeader,
         RentalsList,
         BusinessAccountInfoForm,

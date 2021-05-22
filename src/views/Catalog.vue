@@ -38,7 +38,7 @@
         <v-row v-else class="mt-4 catalog-map">
             <Yam
                 :is-selectable="false"
-                :start-coords="[54.629571, 39.741884]"
+                :start-coords="this.$store.state.centerMap"
                 :rental-points="allRentalsCoords"
                 v-on:click-marker="handleMarker"
             />

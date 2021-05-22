@@ -2,9 +2,6 @@ export default {
     setOffer(state, data) {
         state = {...data};
     },
-    changeIsActive(state) {
-        state.isActive = !state.isActive;
-    },
     setDescription(state, payload) {
         state.description = payload;
     },

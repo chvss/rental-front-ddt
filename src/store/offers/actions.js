@@ -27,9 +27,6 @@ export default {
         }
         commit('setOffer', data);
     },
-    changeIsActive({commit}) {
-        commit('changeIsActive');
-    },
     clearOfferState({commit}) {
         commit('clearOfferState');
     },
@@ -75,8 +72,7 @@ export default {
         const {id} = state.productList.find(item => item.name === data);
         commit('setSelectedProductId', id);
     },
-    setSelectedRentalPointId({ commit }, {value, rentalPointList}) {
-        const {id} = ((rentalPointList || []).find(item => item.address.address === value) || {});
+    setSelectedRentalPointId({commit}, id) {
         commit('setSelectedRentalPointId', id);
     },
 
