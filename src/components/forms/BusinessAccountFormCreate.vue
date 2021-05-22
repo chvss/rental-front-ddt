@@ -33,10 +33,13 @@ export default {
 
     methods: {
         submit: async function () {
-            const data = {
+            const result = await this.$store.dispatch('createBusinessAccount', {
                 name: this.name,
-            };
-            await this.$store.dispatch('createBusinessAccount', data);
+            });
+
+            if (result) {
+                this.$router.push('/business-account');
+            }
         }
     },
 

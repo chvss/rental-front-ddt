@@ -6,6 +6,7 @@
         </page-header>
 
         <v-alert
+            v-if="!isBusiness"
             text
             outlined
             color="teal lighten-2"
@@ -31,12 +32,20 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 import PageHeader from '@/components/blocks/PageHeader';
 import UserPersonalForm from '@/components/forms/UserPersonalForm';
 import UserPasswordForm from '@/components/forms/UserPasswordForm';
 
 export default {
     name: 'Personal',
+
+    computed: {
+        ...mapGetters([
+            'isBusiness',
+        ])
+    },
 
     components: {
         PageHeader,
