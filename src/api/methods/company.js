@@ -39,7 +39,7 @@ class CompanyApi {
 
     @Format
     AllRentals() {
-        return axios.get('/company/rental_points/all/');
+        return axios.get('/company/rental_points/');
     }
 
     @Format
