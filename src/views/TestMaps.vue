@@ -1,22 +1,18 @@
 <template>
-  <yandex-map
-      zoom=10
-      :coords="coords"
-  >
-    <ymap-marker
-        v-for="item in companies"
-        :key="item.id"
-        :coords="item.coords"
-        marker-id="item.id"
-    ></ymap-marker>
-  </yandex-map>
+  <Yam
+      :is-selectable="true"
+      :start-coords="coords"
+      :rental-points="companies"
+    />
 </template>
 
 <script>
 import {mapState} from 'vuex';
+import Yam from '../components/elements/Yam';
 
 export default {
     name: 'TestMaps',
+    components: {Yam},
     data: () => ({
         coords: [54.629571, 39.741884]
     }),
