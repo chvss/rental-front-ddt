@@ -6,6 +6,7 @@
     >
         <template v-slot:activator="{ on, attrs }">
             <v-btn
+                style="margin-top: 6px"
                 text
                 v-bind="attrs"
                 v-on="on"

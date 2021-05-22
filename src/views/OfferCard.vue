@@ -19,20 +19,21 @@
                 <v-btn icon @click="goToList">
                     <v-icon>mdi-arrow-left</v-icon>
                 </v-btn>
-
-                <v-app-bar-title>Title</v-app-bar-title>
-
+                <v-app-bar-title style="width: auto">{{currentOffer.product}}</v-app-bar-title>
                 <v-spacer></v-spacer>
+                <v-row no-gutters>
+                    <v-col md="3"
+                           offset-md="3">
+                        <v-btn icon>
+                            <v-icon>mdi-heart</v-icon>
+                        </v-btn>
+                    </v-col>
+                    <v-col>
+                        <reservation-dialog />
+                    </v-col>
+                </v-row>
 
-                <v-btn icon>
-                    <v-icon>mdi-magnify</v-icon>
-                </v-btn>
 
-                <v-btn icon>
-                    <v-icon>mdi-heart</v-icon>
-                </v-btn>
-
-                <reservation-dialog/>
             </v-app-bar>
             <v-sheet
                 id="scrolling-techniques-2"
