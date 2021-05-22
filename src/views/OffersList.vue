@@ -13,14 +13,21 @@
                                max-height="150px"
                                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
                             <v-card-title>
-                                {{offer.product}}
+                                {{ offer.product }}
                             </v-card-title>
                         </v-img>
 
                         <v-card-text>
+                            <v-row class="d-block text-center">
+                                <div> г.{{ offer.rental_point.address.city_name }},
+                                    {{ offer.rental_point.address.address }}
+                                </div>
+                                <div>{{ offer.description }}</div>
+                            </v-row>
+
                             <v-row
                                 align="center"
-                                class="mx-0"
+                                class="d-flex justify-center"
                             >
                                 <v-rating
                                     :value="offer.rating.length ? getMediumScore(offer.rating) : 0"
@@ -30,29 +37,25 @@
                                     readonly
                                     size="14"
                                 ></v-rating>
-
-                                <div class="grey--text ms-4">
-                                    {{ offer.rating.length ? getMediumScore(offer.rating) : 0 }} ({{offer.rating.length}})
-                                </div>
                             </v-row>
-                            <v-row>
-                                <p>{{offer.rental_point.address.address}}</p>
-                                {{offer.description}}
-                            </v-row>
-
-
 
                         </v-card-text>
-                        <v-card-subtitle>
-                            {{offer.rental_point.phone}}
-                        </v-card-subtitle>
-                        <v-card-actions>
+                        <v-card-actions class="mt-4">
                             <v-btn
                                 color="deep-purple lighten-2"
                                 text
+                                class="absolute l-0 b-1"
                                 @click="() => goToCard(offer.id)"
                             >
                                 Подробнее
+                            </v-btn>
+
+                            <v-btn
+                                color="deep-purple lighten-2"
+                                text
+                                class="absolute r-0 b-1"
+                            >
+                                <v-icon>mdi-phone</v-icon> {{ offer.rental_point.phone }}
                             </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -66,7 +69,6 @@
 
         </v-container>
     </div>
-
 </template>
 
 <script>
