@@ -13,8 +13,10 @@
 
                 <!-- ОПИСАНИЕ -->
                 <v-textarea
+                    outlined
                     v-model="company.description"
                     :counter="1024"
+                    class="mt-4"
                 >
                     <template v-slot:label>
                         <div>

@@ -1,150 +1,151 @@
 <template>
-    <v-dialog
-        v-model="isOpen"
-        persistent
-        max-width="600px"
-    >
-        <template v-slot:activator="{ on, attrs }">
-            <v-btn
-                color="red"
-                active-class="text-accent"
-                text
-                v-bind="attrs"
-                v-on="on"
-                @click="fetchCategoryList"
-            >
-                Создать предложение
-            </v-btn>
-        </template>
-        <v-card>
-            <v-card-title class="headline grey lighten-2">
-                Создание предложения
-            </v-card-title>
+    <div>
 
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                        <v-col>
-                            <v-switch
-                                @change="changeIsActive"
-                                :value="isActive"
-                                label="Активное"
-                            ></v-switch>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-container fluid>
-                                <v-textarea
-                                    counter
+        <v-dialog
+            v-model="isOpen"
+            persistent
+            max-width="600px"
+        >
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                    color="red"
+                    active-class="text-accent"
+                    text
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="fetchCategoryList"
+                >
+                    Создать предложение
+                </v-btn>
+            </template>
+            <v-card>
+                <v-card-title>
+                    <span class="headline">{{ formTitle }}</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container>
+                        <v-row>
+                            <v-col>
+                                <v-combobox
                                     clearable
-                                    label="Описание товара"
-                                    :value="description"
-                                    @input="value => setDescription(value)"
-                                ></v-textarea>
-                            </v-container>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-text-field
-                                label="Количество"
-                                @input="value => updateCount(value)"
-                                :value="count"
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-switch
-                                label="Для детей"
-                                @change="changeIsForChild"
-                                :value="isForChild"
-                            ></v-switch>
-                        </v-col>
-                        <v-col>
-                            <v-switch
-                                label="Для мужчин"
-                                @change="changeIsMale"
-                                :value="isMale"
-                            ></v-switch>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-switch
-                                label="Для женщин"
-                                @change="changeIsFemale"
-                                :value="isFemale"
-                            ></v-switch>
-                        </v-col>
-                        <v-col>
-                            <v-switch
-                                label="Гендерно-нейтральный"
-                                @change="changeIsUnisex"
-                                :value="isUnisex"
-                            ></v-switch>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-combobox
-                                clearable
-                                outlined
-                                label="Выберите категорию"
-                                :value="selectedCategory"
-                                @change="value => selectCategory(value)"
-                                :items="categoryNames"
-                            ></v-combobox>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-combobox
-                                clearable
-                                outlined
-                                label="Выберите товар"
-                                @change="value => setSelectedProductId(value)"
-                                :disabled="isSelectProductDisable"
-                                :items="productNames"
-                            ></v-combobox>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <v-combobox
-                                clearable
-                                outlined
-                                label="Выберите точку аренды"
-                                @change="value => setSelectedRentalPointId({value, rentalPointList})"
-                                :items="rentalPointNames"
-                            ></v-combobox>
-                        </v-col>
-                    </v-row>
-                </v-container>
-            </v-card-text>
+                                    outlined
+                                    label="Выберите категорию"
+                                    :value="selectedCategory"
+                                    @change="value => selectCategory(value)"
+                                    :items="categoryNames"
+                                ></v-combobox>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-combobox
+                                    clearable
+                                    outlined
+                                    label="Выберите товар"
+                                    @change="value => setSelectedProductId(value)"
+                                    :disabled="isSelectProductDisable"
+                                    :items="productNames"
+                                ></v-combobox>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-combobox
+                                    clearable
+                                    outlined
+                                    label="Выберите точку аренды"
+                                    @change="value => setSelectedRentalPointId({value, rentalPointList})"
+                                    :items="rentalPointNames"
+                                ></v-combobox>
+                            </v-col>
+                        </v-row>
 
-            <v-divider></v-divider>
+                        <v-row>
+                            <v-col>
+                                <v-switch
+                                    @change="changeIsActive"
+                                    :value="isActive"
+                                    label="Активное"
+                                    class="mt-0"
+                                ></v-switch>
+                            </v-col>
+                        </v-row>
 
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn
-                    color="green darken-1"
-                    text
-                    @click="() => createOffer(getFullObject)"
-                >
-                    Сохранить
-                </v-btn>
-                <v-btn
-                    color="green darken-1"
-                    text
-                    @click="closeOfferDialog"
-                >
-                    Закрыть
-                </v-btn>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
+                        <v-textarea
+                            clearable
+                            outlined
+                            label="Описание товара"
+                            :value="description"
+                            @input="value => setDescription(value)"
+                        ></v-textarea>
+
+                        <v-row>
+                            <v-col>
+                                <v-text-field
+                                    label="Количество"
+                                    @input="value => updateCount(value)"
+                                    :value="count"
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-switch
+                                    label="Для детей"
+                                    @change="changeIsForChild"
+                                    :value="isForChild"
+                                    class="mt-0"
+                                ></v-switch>
+                            </v-col>
+                            <v-col>
+                                <v-switch
+                                    label="Для мужчин"
+                                    @change="changeIsMale"
+                                    :value="isMale"
+                                    class="mt-0"
+                                ></v-switch>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-switch
+                                    label="Для женщин"
+                                    @change="changeIsFemale"
+                                    :value="isFemale"
+                                    class="mt-0"
+                                ></v-switch>
+                            </v-col>
+                            <v-col>
+                                <v-switch
+                                    label="Гендерно-нейтральный"
+                                    @change="changeIsUnisex"
+                                    :value="isUnisex"
+                                    class="mt-0"
+                                ></v-switch>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="closeOfferDialog"
+                    >
+                        Закрыть
+                    </v-btn>
+                    <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="() => createOffer(getFullObject)"
+                    >
+                        Сохранить
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </div>
 </template>
 
 <script>
@@ -159,7 +160,7 @@ export default {
         };
     },
     computed: {
-        getFullObject () {
+        getFullObject() {
             return {
                 id: this.id,
                 isActive: this.isActive,
@@ -185,6 +186,11 @@ export default {
         },
         isSelectProductDisable() {
             return this.selectedCategoryId === null;
+        },
+        formTitle() {
+            return this.editedIndex === -1
+                ? 'Добавление предложения'
+                : 'Редактирование предложения';
         },
         ...mapState('Offer', [
             'id',
