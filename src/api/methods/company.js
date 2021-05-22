@@ -44,7 +44,7 @@ class CompanyApi {
 
     @Format
     RentalById(id) {
-        return axios.get(`/company/rental_points/detail/${id}/`);
+        return axios.get(`/company/rental_points/${id}/`);
     }
 }
 

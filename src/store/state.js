@@ -21,4 +21,8 @@ export default {
     companies: [],
     typeViewCompanies: 'list',
     cities: [],
+
+    centerMap: [66.087987, 76.672285],
+    offersRentalPoints: [],
+    dialogEditOffer: false,
 };

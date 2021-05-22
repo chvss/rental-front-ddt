@@ -14,7 +14,7 @@
                 <v-list-item-subtitle>
                     {{ item.description }}
                 </v-list-item-subtitle>
-                <div>Телефон: {{ item.phone }}</div>
+                <div>Телефон: <span class="text-accent">{{ item.phone }}</span></div>
             </v-list-item-content>
         </v-list-item>
 
@@ -24,6 +24,12 @@
                 classes=""
                 text="Редактировать"
             ></default-button>
+        </v-card-actions>
+
+        <v-card-actions class="absolute b-0 r-0">
+            <router-link :to="'/control-rental/' + item.id" role="menuitem" class="text-decoration-none text-base">
+                <span class="mx-4">Управление</span>
+            </router-link>
         </v-card-actions>
     </v-card>
 </template>

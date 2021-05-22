@@ -2,7 +2,7 @@
     <div>
         <Yam
             :is-selectable="true"
-            :start-coords="coords"
+            :start-coords="centerMap"
             :rental-points="allRentalsCoords"
         />
     </div>
@@ -15,12 +15,10 @@ import Yam from '../components/elements/Yam';
 export default {
     name: 'TestMaps',
     components: {Yam},
-    data: () => ({
-        coords: [54.629571, 39.741884]
-    }),
     computed: {
         ...mapState([
             'companies',
+            'centerMap',
         ]),
         ...mapGetters([
             'allRentalsCoords',
