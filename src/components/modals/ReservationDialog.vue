@@ -108,6 +108,66 @@
                     </v-row>
                     <v-row>
                         <v-col>
+                            <v-menu
+                                v-model="fromTimePickerMenu"
+                                :close-on-content-click="false"
+                                :nudge-right="40"
+                                transition="scale-transition"
+                                offset-y
+                                max-width="290px"
+                                min-width="290px"
+                            >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field
+                                        v-model="newFromTimeValue"
+                                        label="Выберите время начала бронирования"
+                                        prepend-icon="mdi-clock-time-four-outline"
+                                        readonly
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-time-picker
+                                    v-if="fromTimePickerMenu"
+                                    v-model="newFromTimeValue"
+                                    full-width
+                                    format="24hr"
+                                    @click:minute="() => selectFromTime(newFromTimeValue)"
+                                ></v-time-picker>
+                            </v-menu>
+                        </v-col>
+                        <v-col>
+                            <v-menu
+                                v-model="toTimePickerMenu"
+                                :close-on-content-click="false"
+                                :nudge-right="40"
+                                transition="scale-transition"
+                                offset-y
+                                max-width="290px"
+                                min-width="290px"
+                            >
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field
+                                        v-model="newToTimeValue"
+                                        label="Выберите время окончания бронирования"
+                                        prepend-icon="mdi-clock-time-four-outline"
+                                        readonly
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    ></v-text-field>
+                                </template>
+                                <v-time-picker
+                                    v-if="toTimePickerMenu"
+                                    v-model="newToTimeValue"
+                                    full-width
+                                    format="24hr"
+                                    @click:minute="() => selectToTime(newToTimeValue)"
+                                ></v-time-picker>
+                            </v-menu>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
                             <v-text-field
                                 label="Количество"
                                 @input="value => updateCount(value)"
@@ -129,6 +189,7 @@
                 <v-btn
                     color="blue darken-1"
                     text
+                    @click="save"
                 >
                     Сохранить
                 </v-btn>
@@ -147,18 +208,35 @@ export default {
             isOpen: false,
             fromDatePickerMenu: false,
             toDatePickerMenu: false,
+            fromTimePickerMenu: false,
+            toTimePickerMenu: false,
             newFromDateValue: null,
             newToDateValue: null,
+            newFromTimeValue: null,
+            newToTimeValue: null,
         };
     },
     methods: {
         ...mapActions('Reservation', [
             'setFromDate',
             'setToDate',
-            'setCount'
+            'setFromTime',
+            'setToTime',
+            'setCount',
+            'clear',
+            'createReservation'
         ]),
         closeDialog() {
             this.$data.isOpen = false;
+            this.clear();
+        },
+        async save() {
+            const data = {
+                datetime_from: `${this.fromDate}T${this.fromTime}`,
+                datetime_to: `${this.toDate}T${this.toTime}`,
+                count: this.count
+            };
+            await this.createReservation({id: this.currentOffer.id, data});
         },
         selectFromDate(value) {
             this.setFromDate(value);
@@ -168,19 +246,32 @@ export default {
             this.setToDate(value);
             this.$data.toDatePickerMenu = false;
         },
+        selectFromTime(value) {
+            this.setFromTime(value);
+            this.$data.fromTimePickerMenu = false;
+        },
+        selectToTime(value) {
+            this.setToTime(value);
+            this.$data.toTimePickerMenu = false;
+        },
         updateCount: function (value) {
             const regex = /^[0-9]+$/;
             if (value.match(regex)) {
                 this.setCount(value);
             }
-        }
+        },
     },
     computed: {
         ...mapState('Reservation', [
             'fromDate',
             'toDate',
+            'fromTime',
+            'toTime',
             'count'
         ]),
+        ...mapState('Offer', [
+            'currentOffer'
+        ])
     },
 
 };
