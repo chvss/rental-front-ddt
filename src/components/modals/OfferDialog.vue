@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <v-dialog
             v-model="isOpen"
             persistent
@@ -138,7 +137,7 @@
                     <v-btn
                         color="blue darken-1"
                         text
-                        @click="() => createOffer(getFullObject)"
+                        @click="() => save(getFullObject)"
                     >
                         Сохранить
                     </v-btn>
@@ -234,6 +233,10 @@ export default {
             this.$data.isOpen = false;
             this.$data.selectedCategory = null;
             this.clearOfferState();
+        },
+        async save(fullObject) {
+            await this.createOffer(fullObject);
+            this.closeOfferDialog();
         },
         selectCategory: function (value) {
             this.setSelectedCategoryId(value);

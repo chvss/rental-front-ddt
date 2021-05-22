@@ -25,7 +25,7 @@ export default {
         if (errors) {
             commit('setErrors', errors);
         }
-        commit('setOffer', data);
+        commit('setCurrentOffer', data);
     },
     changeIsActive({commit}) {
         commit('changeIsActive');
@@ -88,5 +88,7 @@ export default {
         if (data.length) {
             commit('setOffersList', data);
         }
-    }
+    },
+
+
 };

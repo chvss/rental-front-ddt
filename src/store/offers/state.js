@@ -15,4 +15,5 @@ export default {
     selectedCategoryId: null,
 
     offersList: [],
+    currentOffer: {},
 };

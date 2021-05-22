@@ -1,6 +1,6 @@
 export default {
-    setOffer(state, data) {
-        state = {...data};
+    setCurrentOffer(state, data) {
+        state.currentOffer = {...data};
     },
     changeIsActive(state) {
         state.isActive = !state.isActive;

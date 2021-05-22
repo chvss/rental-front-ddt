@@ -59,7 +59,14 @@ const router = new VueRouter({
                 requiresAuth: true
             }
         },
-
+        {
+            path: '/offers/:id',
+            name: 'offerCard',
+            component: () => import('../views/OfferCard'),
+            meta: {
+                requiresAuth: true
+            }
+        },
 
         {
             path: '/login',
