@@ -25,17 +25,16 @@
                             </div>
                             <v-chip
                                 v-for="(item, number) in Object.entries(offer)
-                                                    .filter(i => i[0].startsWith('is') && i[1])
+                                                    .filter(i => i[0].startsWith('is') && i[1] && i[0] !== 'is_active')
                                                     .map(i => {
                                                         switch (i[0]) {
                                                             case 'is_female': return 'Для женщин';
-                                                            case 'is_for_children': return 'Для детей';
+                                                            case 'is_for_child': return 'Для детей';
                                                             case 'is_male': return 'Для мужчин';
                                                             case 'is_unisex': return 'Гендерно-нейтральный';
                                                             default: return null;
                                                         }
                                                     })"
-                                }
                                 :key="number"
                                 class="ma-2"
                                 color="green"
