@@ -132,6 +132,7 @@
                                     v-model="newFromTimeValue"
                                     full-width
                                     format="24hr"
+                                    header-color="blue accent-1"
                                     @click:minute="() => selectFromTime(newFromTimeValue)"
                                 ></v-time-picker>
                             </v-menu>
@@ -161,6 +162,7 @@
                                     v-model="newToTimeValue"
                                     full-width
                                     format="24hr"
+                                    header-color="blue accent-1"
                                     @click:minute="() => selectToTime(newToTimeValue)"
                                 ></v-time-picker>
                             </v-menu>
