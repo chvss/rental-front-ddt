@@ -1,6 +1,6 @@
 <template>
-    <v-container class="pa-#">
-        <v-card>
+    <v-container>
+        <v-card class="overflow-hidden" max-width="100%" max-height="100%">
             <v-app-bar
                 absolute
                 color="#fcb69f"
@@ -32,15 +32,15 @@
                         <reservation-dialog />
                     </v-col>
                 </v-row>
-
-
             </v-app-bar>
             <v-sheet
                 id="scrolling-techniques-2"
                 class="overflow-y-auto"
                 max-height="600"
             >
-                <v-container style="height: 1000px;"></v-container>
+                <v-container style="height: 1000px;">
+
+                </v-container>
             </v-sheet>
         </v-card>
     </v-container>
