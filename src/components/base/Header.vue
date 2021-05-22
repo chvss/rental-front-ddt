@@ -34,11 +34,6 @@
                     href="/business-account"
                     v-if="isBusiness"
                 ></header-button>
-
-                <header-button
-                    text="Карта"
-                    href="/map"
-                ></header-button>
             </v-row>
 
             <v-spacer></v-spacer>

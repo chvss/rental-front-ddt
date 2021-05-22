@@ -7,7 +7,6 @@
 
         <v-tabs
             v-model="activeTab"
-            background-color="transparent"
             color="basil"
         >
             <v-tab
@@ -51,6 +50,7 @@
                             color="green"
                             text
                             @click="edit(rental)"
+                            v-if="false"
                         >
                             Редактировать
                         </v-btn>
@@ -70,14 +70,6 @@
                             @click="block"
                         >
                             Опубликовать
-                        </v-btn>
-
-                        <v-btn
-                            color="deep-purple"
-                            text
-                            @click="archive"
-                        >
-                            Убрать в архив
                         </v-btn>
                     </v-card-actions>
                 </v-card>
@@ -135,9 +127,6 @@ export default {
             console.log(rental);
         },
         block() {
-            console.log('block');
-        },
-        archive() {
             console.log('block');
         },
     },
