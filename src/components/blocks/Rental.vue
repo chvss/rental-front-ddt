@@ -6,7 +6,7 @@
         <v-list-item three-line>
             <v-list-item-content>
                 <div class="overline">
-                    #{{ number + 1 }}
+                    #{{ number + 1 }} <span class="caption" v-if="item.is_delivery">(есть доставка)</span>
                 </div>
                 <v-list-item-title class="headline">
                     г. {{ item.address.city_name }}, {{ item.address.address }}
