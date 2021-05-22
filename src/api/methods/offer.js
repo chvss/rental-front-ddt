@@ -17,6 +17,11 @@ class OfferApi {
     GetOfferList() {
         return axios.get('/offer/');
     }
+
+    @Format
+    GetOffersByRental(id) {
+        return axios.get(`/company/${id}/offers/`);
+    }
 }
 
 export default new OfferApi();

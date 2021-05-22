@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import AuthApi from '../api/methods/auth';
 import CompanyApi from '../api/methods/company';
+import OffersApi from '../api/methods/offer';
 import ReferenceApi from '../api/methods/reference';
 
 function errorNotify(text, title = 'Ошибка', type = 'error') {
@@ -186,6 +187,17 @@ export default {
             return false;
         }
         commit('setMarkerRental', data);
-        return true;
-    }
+        return data;
+    },
+
+    // ****************************************************   OFFERS   *************************************************
+    async offersRentalPoints({commit}, id) {
+        const {data, errors} = await OffersApi.GetOffersByRental(id);
+        if (errors) {
+            errorNotify('Ошибка получения списка предложений филиала');
+            return false;
+        }
+        commit('setOffersRentalPoints', data);
+        return data;
+    },
 };

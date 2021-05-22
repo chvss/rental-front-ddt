@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-dialog
-            v-model="isOpen"
+            v-model="dialogEditOffer"
             persistent
             max-width="600px"
         >
@@ -47,28 +47,6 @@
                                 ></v-combobox>
                             </v-col>
                         </v-row>
-                        <v-row>
-                            <v-col>
-                                <v-combobox
-                                    clearable
-                                    outlined
-                                    label="Выберите точку аренды"
-                                    @change="value => setSelectedRentalPointId({value, rentalPointList})"
-                                    :items="rentalPointNames"
-                                ></v-combobox>
-                            </v-col>
-                        </v-row>
-
-                        <v-row>
-                            <v-col>
-                                <v-switch
-                                    @change="changeIsActive"
-                                    :value="isActive"
-                                    label="Активное"
-                                    class="mt-0"
-                                ></v-switch>
-                            </v-col>
-                        </v-row>
 
                         <v-textarea
                             clearable
@@ -81,6 +59,7 @@
                         <v-row>
                             <v-col>
                                 <v-text-field
+                                    outlined
                                     label="Количество"
                                     @input="value => updateCount(value)"
                                     :value="count"
@@ -137,7 +116,7 @@
                     <v-btn
                         color="blue darken-1"
                         text
-                        @click="() => save(getFullObject)"
+                        @click="save"
                     >
                         Сохранить
                     </v-btn>
@@ -152,12 +131,22 @@ import {mapActions, mapState} from 'vuex';
 
 export default {
     name: 'OfferDialog',
+
+    props: {
+        rentalId: {
+            type: Number,
+            required: true,
+        }
+    },
+
     data() {
         return {
-            isOpen: false,
             selectedCategory: null,
+            editedIndex: -1,
+            defaultItem: {},
         };
     },
+
     computed: {
         getFullObject() {
             return {
@@ -179,9 +168,6 @@ export default {
         },
         productNames() {
             return this.productList.map(item => item.name);
-        },
-        rentalPointNames() {
-            return (this.rentalPointList || []).map(({address}) => address.address);
         },
         isSelectProductDisable() {
             return this.selectedCategoryId === null;
@@ -207,14 +193,18 @@ export default {
             'categoryList',
             'selectedCategoryId'
         ]),
-        ...mapState({
-            rentalPointList: state => state.user.company.rental_points,
-        })
+        dialogEditOffer: {
+            get: function () {
+                return this.$store.state.dialogEditOffer;
+            },
+            set: function (value) {
+                this.$store.commit('setDialogEditOffer', value);
+            }
+        }
     },
 
     methods: {
         ...mapActions('Offer', [
-            'changeIsActive',
             'createOffer',
             'clearOfferState',
             'setDescription',
@@ -230,13 +220,9 @@ export default {
             'setSelectedRentalPointId'
         ]),
         closeOfferDialog: function () {
-            this.$data.isOpen = false;
-            this.$data.selectedCategory = null;
+            this.dialogEditOffer = false;
+            this.selectedCategory = null;
             this.clearOfferState();
-        },
-        async save(fullObject) {
-            await this.createOffer(fullObject);
-            this.closeOfferDialog();
         },
         selectCategory: function (value) {
             this.setSelectedCategoryId(value);
@@ -247,7 +233,25 @@ export default {
             if (value.match(regex)) {
                 this.setCount(value);
             }
+        },
+        close() {
+            this.dialogEditOffer = false;
+            this.editedItem = Object.assign({}, this.defaultItem);
+            this.$nextTick(() => {
+                this.editedIndex = -1;
+                this.resetValidation();
+            });
+        },
+        async save() {
+            this.setSelectedRentalPointId(this.rentalId);
+            await this.createOffer(this.getFullObject);
+            this.$store.commit('setDialogEditOffer', false);
+            this.closeOfferDialog();
+            location.reload();
         }
+    },
+    created() {
+        this.setSelectedRentalPointId(this.rentalId);
     }
 };
 </script>
