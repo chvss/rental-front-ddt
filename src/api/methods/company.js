@@ -14,7 +14,7 @@ class CompanyApi {
 
     @Format
     UpdateCompany(id, params) {
-        return axios.put('/company/' + id + '/', params);
+        return axios.put(`/company/${id}/`, params);
     }
 }
 
