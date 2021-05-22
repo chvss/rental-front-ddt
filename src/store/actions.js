@@ -12,6 +12,7 @@ function errorNotify(text, title = 'Ошибка', type = 'error') {
 }
 
 export default {
+    // ****************************************************   USER   ***************************************************
     async login({commit}, user) {
         const {data, errors} = await AuthApi.Login(user);
         if (errors) {
@@ -48,6 +49,7 @@ export default {
     },
     async fetchUser({commit}) {
         const {data, errors} = await AuthApi.FetchUser();
+        console.log(data);
         if (errors) {
             errorNotify('Не удалось получить данные о пользователе');
             console.log(errors);
@@ -66,6 +68,8 @@ export default {
         commit('set_user', data);
         return true;
     },
+
+    // ***************************************************   COMPANY   *************************************************
     async createBusinessAccount({commit}, data) {
         const {errors} = await CompanyApi.CreateBusinessAccount(data);
         if (errors) {
@@ -77,7 +81,18 @@ export default {
         const {data, errors} = await CompanyApi.GetCompany();
         if (errors) {
             console.log(errors);
+            return false;
         }
         commit('setUserCompany', data);
+        return true;
+    },
+    async updateCompany({commit}, company) {
+        const {data, errors} = await CompanyApi.UpdateCompany(this.state.user.company.id, company);
+        if (errors) {
+            console.log(errors);
+            return false;
+        }
+        commit('setUserCompany', data);
+        return true;
     }
 };

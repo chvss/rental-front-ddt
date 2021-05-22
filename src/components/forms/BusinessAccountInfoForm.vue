@@ -40,10 +40,6 @@ export default {
 
     data() {
         return {
-            company: {
-                name: null,
-                description: null,
-            },
             rules: {
                 required: v => !!v || 'Не может быть пустым',
             },
@@ -53,20 +49,23 @@ export default {
     computed: {
         ...mapGetters([
             'authUser',
-        ])
+        ]),
+        company: {
+            get: function () {
+                return {
+                    name: this.authUser.company.name,
+                    description: this.authUser.company.description,
+                };
+            },
+        }
     },
 
     methods: {
-        submit: function () {
-            let data = {
+        submit: async function () {
+            await this.$store.dispatch('updateCompany', {
                 name: this.company.name,
                 description: this.company.description,
-            };
-
-            this.$store.dispatch('updateCompanyInfo', data)
-                .then(() => {
-                })
-                .catch(err => console.log(err));
+            });
         }
     },
 

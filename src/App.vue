@@ -40,6 +40,7 @@ export default {
     created: function () {
         if (this.isLoggedIn) {
             this.fetchUser();
+            console.log(this.$store.state.user);
         }
     }
 };

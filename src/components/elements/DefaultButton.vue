@@ -1,11 +1,10 @@
 <template>
     <v-btn
-        :to="href"
         :color="color"
         :active-class="activeClass"
-        :class="classes"
         text
-        plain
+        class="mt-2"
+        @click="$emit('button-click')"
     >
         {{ text }}
     </v-btn>
@@ -13,28 +12,24 @@
 
 <script>
 export default {
-    name: 'HeaderButton',
+    name: 'DefaultButton',
 
     props: {
         text: {
             type: String,
-            required: true,
+            default: 'Сохранить',
         },
         color: {
             type: String,
-            default: '#444444',
-        },
-        classes: {
-            type: String,
-            default: 'mx-4',
-        },
-        href: {
-            type: String,
-            default: '#',
+            default: 'red',
         },
         activeClass: {
             type: String,
             default: 'text-accent',
+        },
+        event: {
+            type: String,
+            default: 'button-click',
         }
     },
 };

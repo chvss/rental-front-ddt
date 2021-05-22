@@ -7,7 +7,11 @@ export default {
         email: null,
         phone: null,
         city: null,
-        company: {}
+        company: {
+            id: null,
+            name: null,
+            description: null,
+        }
     },
     companies: [],
     errors: {}

@@ -1,13 +1,13 @@
 <template>
-  <v-btn
-    :color="color"
-    :active-class="activeClass"
-    text
-    class="mt-2"
-    type="submit"
-  >
-    {{ text }}
-  </v-btn>
+    <v-btn
+        :color="color"
+        :active-class="activeClass"
+        :class="classes"
+        text
+        type="submit"
+    >
+        {{ text }}
+    </v-btn>
 </template>
 
 <script>
@@ -22,6 +22,10 @@ export default {
         color: {
             type: String,
             default: 'red',
+        },
+        classes: {
+            type: String,
+            default: '',
         },
         activeClass: {
             type: String,

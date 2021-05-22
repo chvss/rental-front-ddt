@@ -16,6 +16,10 @@ export default {
         state.user.email = user.email;
         state.user.phone = user.phone;
         state.user.city = user.city;
+
+        state.user.company.id = user.company.id;
+        state.user.company.name = user.company.name;
+        state.user.company.description = user.company.description;
     },
     setUserCompany(state, data) {
         state.user.company = data;
