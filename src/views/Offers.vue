@@ -1,13 +1,5 @@
 <template>
     <div>
-        <v-alert
-            text
-            outlined
-            color="deep-orange"
-            icon="mdi-fire"
-        >
-            Каталог
-        </v-alert>
         <v-container>
             <v-row>
                 <v-col
