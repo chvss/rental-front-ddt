@@ -47,6 +47,7 @@ export default {
         localStorage.setItem('token', token);
         Vue.axios.defaults.headers.common['Authorization'] = token;
         commit('authSuccess', token, data.user);
+        successNotify('Вы успешно зерегистрированны. Используейте указанные данные для входа на сайт.');
         return true;
     },
     async logout({commit}) {
