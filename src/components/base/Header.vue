@@ -49,7 +49,7 @@
             <v-row v-else class="justify-end">
                 <HeaderButtonIcon
                     href="/cart"
-                    icon="mdi-cart"
+                    icon="mdi-calendar-check"
                     :badgeValue=3
                 />
                 <v-menu

@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-header
-        title="Корзина"
+        title="Бронирование"
         subtitle="В данном разделе представленна история ваших бронирований">
     </page-header>
 

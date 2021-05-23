@@ -8,6 +8,7 @@ import getters from '@/store/getters';
 
 import Offer from './offers';
 import Reservation from './reservation';
+import RentalControl from './rentalControl';
 
 Vue.use(Vuex);
 
@@ -49,6 +50,7 @@ export default new Vuex.Store({
     getters: getters,
     modules: {
         Offer,
-        Reservation
+        Reservation,
+        RentalControl
     }
 });

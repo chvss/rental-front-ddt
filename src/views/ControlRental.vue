@@ -40,7 +40,7 @@
                             <span v-if="rental.is_for_child" :class="rental.is_for_child ? 'red--text' : ''" class="mr-4">Детский</span>
                             <span v-if="rental.is_female" :class="rental.is_female ? 'red--text' : ''" class="mr-4">Женский</span>
                             <span v-if="rental.is_male" :class="rental.is_male ? 'red--text' : ''" class="mr-4">Мужской</span>
-                            <span v-if="rental.is_unisex" :class="rental.is_unisex ? 'red--text' : ''" class="mr-4">Гендерно-нейтральный</span>
+                            <span v-if="rental.is_unisex" :class="rental.is_unisex ? 'red--text' : ''" class="mr-4">Унисекс</span>
                         </div>
                     </v-card-text>
 
@@ -153,14 +153,17 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 import OfferDialog from '../components/modals/OfferDialog';
 import PageHeader from '@/components/blocks/PageHeader';
 
 export default {
     name: 'ControlRental',
-
+    components: {
+        OfferDialog,
+        PageHeader,
+    },
     data() {
         return {
             rentals: null,
@@ -170,16 +173,16 @@ export default {
             ],
         };
     },
-
-    components: {
-        OfferDialog,
-        PageHeader,
-    },
-
     methods: {
         ...mapActions([
             'rentalPointsDetail',
             'offersRentalPoints',
+        ]),
+        ...mapActions('RentalControl', [
+            'clearState',
+            'setOffersList',
+            'setReservationList',
+            'fetchReservationsByRentalId'
         ]),
         edit(rental) {
             this.$store.commit('setDialogEditOffer', true);
@@ -189,9 +192,16 @@ export default {
             console.log('block');
         },
     },
+    computed: {
+        ...mapState('RentalControl', [
+            'offersList',
+            'reservationList'
+        ])
+    },
 
     async created() {
         this.rentals = await this.offersRentalPoints(this.$route.params.id);
+        await this.fetchReservationsByRentalId(this.$route.params.id);
     }
 };
 </script>

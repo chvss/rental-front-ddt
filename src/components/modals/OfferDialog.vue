@@ -95,7 +95,7 @@
                             </v-col>
                             <v-col>
                                 <v-switch
-                                    label="Гендерно-нейтральный"
+                                    label="Унисекс"
                                     @change="changeIsUnisex"
                                     :value="isUnisex"
                                     class="mt-0"
