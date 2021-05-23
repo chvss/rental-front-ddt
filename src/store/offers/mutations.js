@@ -54,6 +54,17 @@ export default {
 
     setOffersList(state, data) {
         state.offersList = [...data];
+    },
+    setOffer(state, data) {
+        state.id = data.id;
+        state.description = data.description;
+        state.isMale = data.is_male;
+        state.isUnisex = data.is_unisex;
+        state.isFemale = data.is_female;
+        state.isForChild = data.is_for_child;
+        state.product = data.product.name;
+        state.selectedProductId = data.product.id;
+        state.selectedCategoryId = data.category.id;
+        state.selectedRentalPointId = data.rentalPointId;
     }
-
 };

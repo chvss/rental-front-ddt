@@ -22,7 +22,7 @@
                                 <div> г.{{ offer.rental_point.address.city_name }},
                                     {{ offer.rental_point.address.address }}
                                 </div>
-                                <div>{{ offer.description }}</div>
+                                <div class="overflow-y-hidden" style="height: 22px; text-overflow: ellipsis">{{ offer.description }}</div>
                             </v-row>
 
                             <v-row

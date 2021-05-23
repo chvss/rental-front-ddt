@@ -4,4 +4,6 @@ export default {
     count: null,
     fromTime: null,
     toTime: null,
+    status: null,
+    offer: {}
 };

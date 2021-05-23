@@ -20,7 +20,7 @@ class OfferApi {
 
     @Format
     GetOffersByRental(id) {
-        return axios.get(`/company/${id}/offers/`);
+        return axios.get(`/company/rental_points/${id}/offers/`);
     }
 
     @Format

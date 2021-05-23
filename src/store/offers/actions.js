@@ -85,4 +85,8 @@ export default {
             commit('setOffersList', data);
         }
     },
+
+    setOffer({commit}, data) {
+        commit('setOffer', data);
+    }
 };

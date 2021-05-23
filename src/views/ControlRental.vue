@@ -30,7 +30,7 @@
                     :key="i"
                     class="mx-auto mt-4"
                 >
-                    <v-card-title># {{ rental.id }} {{ rental.product }}</v-card-title>
+                    <v-card-title># {{ rental.id }} {{ rental.product.name }}</v-card-title>
 
                     <v-card-text>
                         <div>{{ rental.description }}</div>
@@ -71,82 +71,90 @@
                         >
                             Опубликовать
                         </v-btn>
+                        <v-btn
+                            color="blue"
+                            text
+                            @click="block">
+                            Подробнее
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-tab-item>
 
             <v-tab-item class="pt-4">
-                <v-card flat>
-                    <v-card-text>
 
-                          <v-alert
-                              outlined
-                              type="warning"
-                              prominent
-                              border="left"
-                          >
-                            Бронь: "Велосипед горный". Кол-во: 1 шт. С 25.05.2021 до 26.05.2021
-                            <br>
-                            Телефон: 8-993-825-64-56
-                            <br>
-                            Статус: Новая
-                            <div class="absolute r-0 b-0">
-                              <v-btn
-                                  color="green"
-                                  text
-                              >
-                                Принять
-                              </v-btn>
-                              <v-btn
-                                  color="red"
-                                  text
-                              >
-                                Отказать
-                              </v-btn>
-                              <v-btn
-                                  color="lighten-2"
-                                  text
-                              >
-                                Выполнено
-                              </v-btn>
-                            </div>
-                          </v-alert>
-                          <v-alert
-                              outlined
-                              type="success"
-                              text
-                          >
-                            Бронь: "Велосипед горный". Кол-во: 2шт. С 21.05.2021 до 22.05.2021
-                            <br>
-                            Телефон: 8-993-825-64-56
-                            <br>
-                            Статус: Выполнено
-                          </v-alert>
+                <Reservation/>
+<!--                <v-card flat>-->
+<!--                    <v-card-text>-->
 
-                          <v-alert
-                              outlined
-                              type="success"
-                              text
-                          >
-                            Бронь: "Велосипед горный". Кол-во: 2шт. С 21.05.2021 до 22.05.2021
-                            <br>
-                            Телефон: 8-923-478-45-63
-                            <br>
-                            Статус: Выполнено
-                          </v-alert>
-                          <v-alert
-                              outlined
-                              type="success"
-                              text
-                          >
-                            Бронь: "Велосипед детский". Кол-во: 1шт. С 15.05.2021 до 18.05.2021
-                            <br>
-                            Телефон: 8-918-333-80-80
-                            <br>
-                            Статус: Выполнено
-                          </v-alert>
-                    </v-card-text>
-                </v-card>
+<!--                          <v-alert-->
+<!--                              outlined-->
+<!--                              type="warning"-->
+<!--                              prominent-->
+<!--                              border="left"-->
+<!--                          >-->
+<!--                            Бронь: "Велосипед горный". Кол-во: 1 шт. С 25.05.2021 до 26.05.2021-->
+<!--                            <br>-->
+<!--                            Телефон: 8-993-825-64-56-->
+<!--                            <br>-->
+<!--                            Статус: Новая-->
+<!--                            <div class="absolute r-0 b-0">-->
+<!--                              <v-btn-->
+<!--                                  color="green"-->
+<!--                                  text-->
+<!--                              >-->
+<!--                                Принять-->
+<!--                              </v-btn>-->
+<!--                              <v-btn-->
+<!--                                  color="red"-->
+<!--                                  text-->
+<!--                              >-->
+<!--                                Отказать-->
+<!--                              </v-btn>-->
+<!--                              <v-btn-->
+<!--                                  color="lighten-2"-->
+<!--                                  text-->
+<!--                              >-->
+<!--                                Выполнено-->
+<!--                              </v-btn>-->
+<!--                            </div>-->
+<!--                          </v-alert>-->
+<!--                          <v-alert-->
+<!--                              outlined-->
+<!--                              type="success"-->
+<!--                              text-->
+<!--                          >-->
+<!--                            Бронь: "Велосипед горный". Кол-во: 2шт. С 21.05.2021 до 22.05.2021-->
+<!--                            <br>-->
+<!--                            Телефон: 8-993-825-64-56-->
+<!--                            <br>-->
+<!--                            Статус: Выполнено-->
+<!--                          </v-alert>-->
+
+<!--                          <v-alert-->
+<!--                              outlined-->
+<!--                              type="success"-->
+<!--                              text-->
+<!--                          >-->
+<!--                            Бронь: "Велосипед горный". Кол-во: 2шт. С 21.05.2021 до 22.05.2021-->
+<!--                            <br>-->
+<!--                            Телефон: 8-923-478-45-63-->
+<!--                            <br>-->
+<!--                            Статус: Выполнено-->
+<!--                          </v-alert>-->
+<!--                          <v-alert-->
+<!--                              outlined-->
+<!--                              type="success"-->
+<!--                              text-->
+<!--                          >-->
+<!--                            Бронь: "Велосипед детский". Кол-во: 1шт. С 15.05.2021 до 18.05.2021-->
+<!--                            <br>-->
+<!--                            Телефон: 8-918-333-80-80-->
+<!--                            <br>-->
+<!--                            Статус: Выполнено-->
+<!--                          </v-alert>-->
+<!--                    </v-card-text>-->
+<!--                </v-card>-->
             </v-tab-item>
         </v-tabs-items>
     </div>
@@ -157,10 +165,12 @@ import {mapActions, mapState} from 'vuex';
 
 import OfferDialog from '../components/modals/OfferDialog';
 import PageHeader from '@/components/blocks/PageHeader';
+import Reservation from '../components/blocks/Reservation';
 
 export default {
     name: 'ControlRental',
     components: {
+        Reservation,
         OfferDialog,
         PageHeader,
     },
@@ -184,8 +194,15 @@ export default {
             'setReservationList',
             'fetchReservationsByRentalId'
         ]),
+        ...mapActions('Offer', [
+            'setOffer'
+        ]),
         edit(rental) {
             this.$store.commit('setDialogEditOffer', true);
+            this.setOffer({
+                ...rental,
+                rentalPointId: this.$route.params.id
+            });
             console.log(rental);
         },
         block() {
