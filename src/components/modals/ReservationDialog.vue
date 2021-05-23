@@ -239,6 +239,7 @@ export default {
                 count: this.count
             };
             await this.createReservation({id: this.currentOffer.id, data});
+            this.$data.isOpen = false;
         },
         selectFromDate(value) {
             this.setFromDate(value);
