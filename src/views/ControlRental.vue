@@ -36,10 +36,11 @@
                         <div>{{ rental.description }}</div>
                         <div>{{ rental.count }} шт.</div>
                         <div>
-                            <span :class="rental.is_for_child ? 'red--text' : ''" class="mr-4">Детский</span>
-                            <span :class="rental.is_female ? 'red--text' : ''" class="mr-4">Женский</span>
-                            <span :class="rental.is_male ? 'red--text' : ''" class="mr-4">Мужской</span>
-                            <span :class="rental.is_unisex ? 'red--text' : ''" class="mr-4">Гендерно-нейтральный</span>
+                          Ассортимент:
+                            <span v-if="rental.is_for_child" :class="rental.is_for_child ? 'red--text' : ''" class="mr-4">Детский</span>
+                            <span v-if="rental.is_female" :class="rental.is_female ? 'red--text' : ''" class="mr-4">Женский</span>
+                            <span v-if="rental.is_male" :class="rental.is_male ? 'red--text' : ''" class="mr-4">Мужской</span>
+                            <span v-if="rental.is_unisex" :class="rental.is_unisex ? 'red--text' : ''" class="mr-4">Гендерно-нейтральный</span>
                         </div>
                     </v-card-text>
 
@@ -50,7 +51,6 @@
                             color="green"
                             text
                             @click="edit(rental)"
-                            v-if="false"
                         >
                             Редактировать
                         </v-btn>
