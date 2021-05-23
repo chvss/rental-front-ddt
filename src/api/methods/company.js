@@ -46,6 +46,11 @@ class CompanyApi {
     RentalById(id) {
         return axios.get(`/company/rental_points/${id}/`);
     }
+
+    @Format
+    GetReservationsListByRentalId(id) {
+        return axios.get(`/company/rental_points/${id}/reservations/`);
+    }
 }
 
 export default new CompanyApi();

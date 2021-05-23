@@ -27,6 +27,11 @@ class OfferApi {
     CreateReservation(id, data) {
         return axios.post(`/offer/${id}/reservation/`, data);
     }
+
+    @Format
+    GetReservationByOfferId(id) {
+        return axios.get(`/offer/${id}/reservation/`);
+    }
 }
 
 export default new OfferApi();

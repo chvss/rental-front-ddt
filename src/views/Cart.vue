@@ -5,7 +5,7 @@
     color="deep-orange"
     icon="mdi-fire"
   >
-    Корзина
+    Бронирование
   </v-alert>
 </template>
 

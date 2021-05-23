@@ -200,4 +200,12 @@ export default {
         commit('setOffersRentalPoints', data);
         return data;
     },
+
+    async getReservationByOfferId({commit}, id) {
+        const {data, errors} = await OffersApi.GetReservationByOfferId(id);
+        if (errors) {
+            errorNotify('Errr');
+        }
+        commit('setOfferReservations', data);
+    }
 };
