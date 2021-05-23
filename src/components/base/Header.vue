@@ -52,10 +52,6 @@
                     icon="mdi-cart"
                     :badgeValue=3
                 />
-                <HeaderButtonIcon
-                    href="/favorite"
-                    icon="mdi-heart"
-                />
                 <v-menu
                     left
                     bottom
