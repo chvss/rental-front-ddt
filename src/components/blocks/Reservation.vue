@@ -1,29 +1,32 @@
 <template>
     <v-alert
         outlined
-        type="warning"
+        :type="getType"
         prominent
         border="left"
     >
-        Бронь: "{{ offer.category.name }} {{ offer.product.name }}". Кол-во: {{offer.count}} шт. С {{ this.formatDate(fromDate) }} до {{ this.formatDate(toDate) }}
+        Бронь: "{{ offer.category.name }} {{ offer.product.name }}". Кол-во: {{offer.count}} шт. С {{ this.formatFromDate }} до {{ this.formatDate(offer.datetime_to) }}
         <br>
-        Телефон: {{ company.rental_point.phone }}
+        Телефон: {{ rental.phone }}
         <br>
-        Статус: {{ status }}
+        Статус: {{ reservation.status }}
         <div class="absolute r-0 b-0">
             <v-btn
+                v-if="reservation.status === 'Новая'"
                 color="green"
                 text
             >
                 Принять
             </v-btn>
             <v-btn
+                v-if="reservation.status !== 'Выполнена'"
                 color="red"
                 text
             >
                 Отказать
             </v-btn>
             <v-btn
+                v-if="reservation.status !== 'Выполнена'"
                 color="lighten-2"
                 text
             >
@@ -34,7 +37,6 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
 import moment from 'moment';
 
 export default {
@@ -44,21 +46,31 @@ export default {
             
         };
     },
+    props: {
+        offer: {
+            default: () => ({})
+        },
+        reservation: {
+            default: () => ({})
+        },
+        rental: {
+            default: () => ({})
+        }
+    },
     methods: {
-        
+        formatDate: (date) => moment(date).format('DD.MM.YYYY')
     },
     computed: {
-        ...mapState('Reservation', [
-            'offer',
-            'fromDate',
-            'toDate',
-            'count',
-            'fromTime',
-            'toTime',
-            'status'
-        ]),
-        formatDate(date) {
-            return moment(date).format('DD.MM.YYYY');
+        formatFromDate() {
+            return this.formatDate(this.offer.datetime_from);
+        },
+        getType() {
+            switch (this.reservation.status) {
+                case 'Новая':
+                    return 'warning';
+                default:
+                    return 'success';
+            }
         }
     }
 };

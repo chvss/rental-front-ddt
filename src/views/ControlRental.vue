@@ -26,21 +26,21 @@
                 </v-row>
 
                 <v-card
-                    v-for="(rental, i) in rentals"
+                    v-for="(offer, i) in offers"
                     :key="i"
                     class="mx-auto mt-4"
                 >
-                    <v-card-title># {{ rental.id }} {{ rental.product.name }}</v-card-title>
+                    <v-card-title># {{ offer.id }} {{ offer.product.name }}</v-card-title>
 
                     <v-card-text>
-                        <div>{{ rental.description }}</div>
-                        <div>{{ rental.count }} шт.</div>
+                        <div>{{ offer.description }}</div>
+                        <div>{{ offer.count }} шт.</div>
                         <div>
                           Ассортимент:
-                            <span v-if="rental.is_for_child" :class="rental.is_for_child ? 'red--text' : ''" class="mr-4">Детский</span>
-                            <span v-if="rental.is_female" :class="rental.is_female ? 'red--text' : ''" class="mr-4">Женский</span>
-                            <span v-if="rental.is_male" :class="rental.is_male ? 'red--text' : ''" class="mr-4">Мужской</span>
-                            <span v-if="rental.is_unisex" :class="rental.is_unisex ? 'red--text' : ''" class="mr-4">Унисекс</span>
+                            <span v-if="offer.is_for_child" :class="offer.is_for_child ? 'red--text' : ''" class="mr-4">Детский</span>
+                            <span v-if="offer.is_female" :class="offer.is_female ? 'red--text' : ''" class="mr-4">Женский</span>
+                            <span v-if="offer.is_male" :class="offer.is_male ? 'red--text' : ''" class="mr-4">Мужской</span>
+                            <span v-if="offer.is_unisex" :class="offer.is_unisex ? 'red--text' : ''" class="mr-4">Унисекс</span>
                         </div>
                     </v-card-text>
 
@@ -50,13 +50,13 @@
                         <v-btn
                             color="green"
                             text
-                            @click="edit(rental)"
+                            @click="edit(offer)"
                         >
                             Редактировать
                         </v-btn>
 
                         <v-btn
-                            v-if="rental.is_active"
+                            v-if="offer.is_active"
                             color="red lighten-2"
                             text
                             @click="block"
@@ -83,78 +83,13 @@
 
             <v-tab-item class="pt-4">
 
-                <Reservation/>
-<!--                <v-card flat>-->
-<!--                    <v-card-text>-->
-
-<!--                          <v-alert-->
-<!--                              outlined-->
-<!--                              type="warning"-->
-<!--                              prominent-->
-<!--                              border="left"-->
-<!--                          >-->
-<!--                            Бронь: "Велосипед горный". Кол-во: 1 шт. С 25.05.2021 до 26.05.2021-->
-<!--                            <br>-->
-<!--                            Телефон: 8-993-825-64-56-->
-<!--                            <br>-->
-<!--                            Статус: Новая-->
-<!--                            <div class="absolute r-0 b-0">-->
-<!--                              <v-btn-->
-<!--                                  color="green"-->
-<!--                                  text-->
-<!--                              >-->
-<!--                                Принять-->
-<!--                              </v-btn>-->
-<!--                              <v-btn-->
-<!--                                  color="red"-->
-<!--                                  text-->
-<!--                              >-->
-<!--                                Отказать-->
-<!--                              </v-btn>-->
-<!--                              <v-btn-->
-<!--                                  color="lighten-2"-->
-<!--                                  text-->
-<!--                              >-->
-<!--                                Выполнено-->
-<!--                              </v-btn>-->
-<!--                            </div>-->
-<!--                          </v-alert>-->
-<!--                          <v-alert-->
-<!--                              outlined-->
-<!--                              type="success"-->
-<!--                              text-->
-<!--                          >-->
-<!--                            Бронь: "Велосипед горный". Кол-во: 2шт. С 21.05.2021 до 22.05.2021-->
-<!--                            <br>-->
-<!--                            Телефон: 8-993-825-64-56-->
-<!--                            <br>-->
-<!--                            Статус: Выполнено-->
-<!--                          </v-alert>-->
-
-<!--                          <v-alert-->
-<!--                              outlined-->
-<!--                              type="success"-->
-<!--                              text-->
-<!--                          >-->
-<!--                            Бронь: "Велосипед горный". Кол-во: 2шт. С 21.05.2021 до 22.05.2021-->
-<!--                            <br>-->
-<!--                            Телефон: 8-923-478-45-63-->
-<!--                            <br>-->
-<!--                            Статус: Выполнено-->
-<!--                          </v-alert>-->
-<!--                          <v-alert-->
-<!--                              outlined-->
-<!--                              type="success"-->
-<!--                              text-->
-<!--                          >-->
-<!--                            Бронь: "Велосипед детский". Кол-во: 1шт. С 15.05.2021 до 18.05.2021-->
-<!--                            <br>-->
-<!--                            Телефон: 8-918-333-80-80-->
-<!--                            <br>-->
-<!--                            Статус: Выполнено-->
-<!--                          </v-alert>-->
-<!--                    </v-card-text>-->
-<!--                </v-card>-->
+                <Reservation
+                    v-for="reservaton in reservationList"
+                    :key="reservaton.id"
+                    :reservation="reservaton"
+                    :offer="offers.find(item => item.id === reservaton.offer)"
+                    :rental="currentRental"
+                />
             </v-tab-item>
         </v-tabs-items>
     </div>
@@ -176,8 +111,9 @@ export default {
     },
     data() {
         return {
-            rentals: null,
+            offers: null,
             activeTab: null,
+            currentRental: {},
             tabs: [
                 'Предложения', 'Бронирования'
             ],
@@ -187,6 +123,7 @@ export default {
         ...mapActions([
             'rentalPointsDetail',
             'offersRentalPoints',
+            'rentalPointsDetail'
         ]),
         ...mapActions('RentalControl', [
             'clearState',
@@ -197,13 +134,13 @@ export default {
         ...mapActions('Offer', [
             'setOffer'
         ]),
-        edit(rental) {
+        edit(offer) {
             this.$store.commit('setDialogEditOffer', true);
             this.setOffer({
-                ...rental,
+                ...offer,
                 rentalPointId: this.$route.params.id
             });
-            console.log(rental);
+            console.log(offer);
         },
         block() {
             console.log('block');
@@ -211,14 +148,14 @@ export default {
     },
     computed: {
         ...mapState('RentalControl', [
-            'offersList',
             'reservationList'
         ])
     },
 
     async created() {
-        this.rentals = await this.offersRentalPoints(this.$route.params.id);
+        this.offers = await this.offersRentalPoints(this.$route.params.id);
         await this.fetchReservationsByRentalId(this.$route.params.id);
+        this.currentRental = await this.rentalPointsDetail(this.$route.params.id);
     }
 };
 </script>
