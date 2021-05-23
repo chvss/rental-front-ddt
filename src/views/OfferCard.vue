@@ -1,6 +1,6 @@
 <template>
-    <v-container class="pa-#">
-        <v-card>
+    <v-container>
+        <v-card class="overflow-hidden" max-width="100%" max-height="100%">
             <v-app-bar
                 absolute
                 color="#fcb69f"
@@ -32,15 +32,27 @@
                         <reservation-dialog />
                     </v-col>
                 </v-row>
-
-
             </v-app-bar>
             <v-sheet
                 id="scrolling-techniques-2"
                 class="overflow-y-auto"
                 max-height="600"
             >
-                <v-container style="height: 1000px;"></v-container>
+                <v-container style="height: 1000px; margin-top: 125px">
+                    <v-card>
+                        <v-card-title>
+                            {{currentOffer.rental_point.address.city_name}}
+                        </v-card-title>
+                        <v-card-text>
+                            {{currentOffer.rental_point.address.address}}
+                            <Yam
+                                :start-coords="[currentOffer.rental_point.address.latitude, currentOffer.rental_point.address.longitude]"
+                                :is-selectable="false"
+                                :is-one-point="true"
+                            />
+                        </v-card-text>
+                    </v-card>
+                </v-container>
             </v-sheet>
         </v-card>
     </v-container>
@@ -50,10 +62,11 @@
 <script>
 import {mapActions, mapState} from 'vuex';
 import ReservationDialog from '../components/modals/ReservationDialog';
+import Yam from '../components/elements/Yam';
 
 export default {
     name: 'OfferCard',
-    components: {ReservationDialog},
+    components: {Yam, ReservationDialog},
     data: function () {
         return {
             isLoading: false
