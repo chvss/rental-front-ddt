@@ -11,7 +11,7 @@
                     <v-card v-if="!isLoading">
                         <v-img class="white--text align-end"
                                max-height="150px"
-                               src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
+                               src="../../public/img.jpg">
                             <v-card-title>
                                 {{ offer.product }}
                             </v-card-title>
